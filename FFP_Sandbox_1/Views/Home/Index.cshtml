@@ -1,0 +1,241 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewData["Page"] = "Home";
+}
+
+<!-- Carousal Slider -->
+<div id="main-banner-slider" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#main-banner-slider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#main-banner-slider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#main-banner-slider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/banner1-min.jpg" class="d-block w-100 banner-img first" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/banner2-min.jpg" class="d-block w-100 banner-img second" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/banner3-min.jpg" class="d-block w-100 banner-img third" alt="...">
+        </div>
+    </div>
+</div>
+<!-- / Carousal Slider -->
+
+<!-- Welcome -->
+<section class="welcome py-4">
+    <div class="container">
+        @{
+            <!-- Is NOT Signed In ? -->
+            if (true) 
+            {
+                <h2>Football Fans Platform</h2>
+                <p class="mb-0">
+                    Are you a football fan? Do you want an environment that you can live your passion in? 
+                    If so, then this platform is for you. Here, you find latest match fixtures, community 
+                    for discussions, football-related items to buy or sell, some simple games, 
+                    and much more!
+                </p>
+            }
+            else
+            {
+                <!-- Is a New User ? -->
+                if (false)
+                {
+                    <h2>Welcome, Mazen</h2>
+                }
+                else
+                {
+                    <h2>Welcome back, Mazen</h2>
+                }
+
+                <p class="mb-0">
+                    So many things happened recently. Real Madrid and Barcelona match ended with the result of 1-1. 
+                    Sameh Mohammed published a new post with the title "My Expectations for the Coming Season". 
+                    There are new products in the stores that you may like.
+                </p>
+            }
+        }
+    </div>
+</section>
+<!-- / Welcome -->
+
+<div class="py-lg-4 px-lg-5">
+    <div class="row m-0 pt-2 pt-lg-0">
+        <main role="main" class="pb-3 p-0 col-xl-9">
+            <!-- Fixtures -->
+            <div class="content-space p-3 mb-3 card-container">
+                <h3>Fixtures</h3>
+                <div class="mt-3 row px-3 pt-2">
+                    @{
+                        for (int i = 0; i < 8; i++)
+                        {
+                            <div class="p-2 col-md-3 col-6">
+                                <div class="card rounded-0 border-0 p-0">
+                                    <div class="match-poster" style="background-color: #395eac;">
+                                        <img src="~/img/match-poster-shapes.svg" class="match-vec-shapes" alt="...">
+                                        <img src="~/img/dinamo-zagreb-min.png" class="club club1" />
+                                        <img src="~/img/chelsea-min.png" class="club club2" />
+                                    </div>
+                                    <div class="card-body p-2">
+                                        <h5 class="card-title text-center">1 - 0</h5>
+                                        <p class="card-text d-flex gap-1 align-items-center mb-1">
+                                            <i class="fa-solid fa-star star"></i>
+                                            <span>9.2</span>
+                                        </p>
+                                        <p class="card-text d-flex gap-2 align-items-center">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <span>Sep 10 - 2023</span>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer p-0 border-0 text-muted">
+                                        <a href="#" class="p-2 fs-7 text-white text-decoration-none d-block text-center show-details-btn">Show details</a>
+                                    </div>
+                                </div> 
+                            </div>
+                        }
+                    }
+                    <div class="col-12 pt-3 pb-2 d-flex justify-content-center">
+                        <a class="fs-5 c-link d-flex gap-2 align-items-center" asp-controller="" asp-action="">
+                            <span>Show More Fixtures</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- / Fixtures -->
+
+            <!-- Posts -->
+            <div class="content-space p-3 mb-3 card-container">
+                <h3>Posts</h3>
+                <div class="mt-3 row px-3 pt-2">
+                    @{
+                        for (int i = 0; i < 8; i++)
+                        {
+                            <div class="p-2 col-md-3 col-6">
+                                <div class="card rounded-0 border-0 p-0">
+                                    <img src="~/img/post8.jpg" class="card-img-top rounded-0" alt="...">
+                                    <div class="card-body p-2">
+                                        <h5 class="card-title c-sm-card-title mb-3">Teams best positioned to secure European qualification</h5>
+                                        <p class="card-text d-flex gap-2 align-items-center mb-1">
+                                            <i class="fa-solid fa-user"></i>
+                                            <span>Mazen Salah</span>
+                                        </p>
+                                        <p class="card-text d-flex gap-2 align-items-center">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <span>Sep 10 - 2023</span>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer p-0 border-0 text-muted">
+                                        <a href="#" class="p-2 fs-7 text-white text-decoration-none d-block text-center show-details-btn">Show details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="col-12 pt-3 pb-2 d-flex justify-content-center">
+                        <a class="fs-5 c-link d-flex gap-2 align-items-center" asp-controller="" asp-action="">
+                            <span>Show More Posts</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- / Posts -->
+
+            <!-- Shop -->
+            <div class="content-space p-3 mb-3 card-container">
+                <h3>Shop</h3>
+                <div id="product-slider" class="mt-3 pt-2 carousel slide d-flex justify-content-center align-items-center product-slider" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="p-2 col-md-3">
+                                <div class="card rounded-3 overflow-hidden border-0 p-0">
+                                    <img src="~/img/product1.jpg" class="card-img-top rounded-0 prod-img" alt="...">
+                                    <div class="card-body p-2">
+                                        <h5 class="card-title c-sm-card-title mb-3">Inspirational Soccer Stories for Young Readers: 12 Unbelievable True Tales to Inspire and Amaze Young Soccer</h5>
+                                        
+                                        <div class="d-flex flex-column">
+                                            <span class="fs-6 text-decoration-line-through old-price">$11.99</span>
+                                            <span class="fs-4 new-price">$11.99</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex flex-column align-items-center gap-2 border-0">
+                                        <a href="#" class="btn btn-primary-dark w-100 prod-btn">Buy Now</a>
+                                        <a href="#" class="btn btn-secondary w-100 prod-btn">Add to cart</a>
+                                        <a href="#" class="btn btn-secondary w-100 prod-btn">Show details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @{
+                            for (int i = 0; i < 11; i++)
+                            {
+                                <div class="carousel-item">
+                                    <div class="p-2 col-md-3">
+                                        <div class="card rounded-3 overflow-hidden border-0 p-0">
+                                            <img src="~/img/product1.jpg" class="card-img-top rounded-0 prod-img" alt="...">
+                                            <div class="card-body p-2">
+                                                <h5 class="card-title c-sm-card-title mb-3">Inspirational Soccer Stories for Young Readers: 12 Unbelievable True Tales to Inspire and Amaze Young Soccer</h5>
+
+                                                <div class="d-flex flex-column">
+                                                    <span class="fs-6 text-decoration-line-through old-price">$11.99</span>
+                                                    <span class="fs-4 new-price">$11.99</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer d-flex flex-column align-items-center gap-2 border-0">
+                                                <a href="#" class="btn btn-primary-dark w-100 prod-btn">Buy Now</a>
+                                                <a href="#" class="btn btn-secondary w-100 prod-btn">Add to cart</a>
+                                                <a href="#" class="btn btn-secondary w-100 prod-btn">Show details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#product-slider" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#product-slider" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="col-12 pt-3 pb-2 d-flex justify-content-center">
+                    <a class="fs-5 c-link d-flex gap-2 align-items-center" asp-controller="" asp-action="">
+                        <span>Show More Products</span>
+                    </a>
+                </div>
+            </div>
+            <!-- / Shop -->
+        </main>
+        <aside class="col-xl-3">
+            <div class="content-space p-3 mb-3">
+                <div class="d-flex justify-content-center flex-xl-column flex-sm-row flex-column gap-4 align-items-center h-auto p-4 ad-space quiz">
+                    <img src="~/img/quiz-vec.png" alt="Quiz Vector">
+                    <div class="">
+                        <p>You can test your football information by doing a quick and joyable quiz</p>
+                        <a href="" class="btn btn-primary-dark">Take it</a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-space p-3 mb-3">
+                <div class="d-flex justify-content-center align-items-center ad-space">
+                    <span>Ad Space</span>
+                </div>
+            </div>
+            <div class="content-space p-3 mb-3">
+                <div class="d-flex justify-content-center align-items-center ad-space">
+                    <span>Ad Space</span>
+                </div>
+            </div>
+            <div class="content-space p-3 mb-3">
+                <div class="d-flex justify-content-center align-items-center ad-space">
+                    <span>Ad Space</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>

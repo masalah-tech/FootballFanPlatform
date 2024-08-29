@@ -1,0 +1,505 @@
+﻿@{
+    string role = "Admin";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" href="~/favicon.png">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap-5.3.1-dist/css/bootstrap.min.css" />
+
+    <!-- Boxicons -->
+    <link rel="stylesheet" href="~/lib/boxicons-2.1.4/css/boxicons.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+    <!-- Sign-in Modal -->
+    <div class="modal fade" id="signin-modal" aria-hidden="true" aria-labelledby="signin-modal-toggle-label" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-4" id="signin-modal-toggle-label">Sign in</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="signin-username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="signin-username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signin-password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signin-password">
+                        </div>
+                        <button type="submit" class="btn btn-primary col-12">Sign in</button>
+                    </form>
+                    <div class="d-flex justify-content-end mt-3">
+                        <a href="javascript:void(0)" class="text-decoration-none" data-bs-target="#signup-modal" data-bs-toggle="modal">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Sign-in Modal -->
+
+    <!-- Sign-up Modal -->
+    <div class="modal fade" id="signup-modal" aria-hidden="true" aria-labelledby="signup-modal-toggle-label" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="signup-modal-toggle-label">Sign up</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="signup-first-name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="signup-first-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signup-last-name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="signup-last-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signup-username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="signup-username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signup-password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signup-password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signup-confirm-password" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="signup-confirm-password">
+                        </div>
+                        <button type="submit" class="btn btn-primary col-12">Sign up</button>
+                    </form>
+                    <div class="d-flex justify-content-end mt-3">
+                        <a href="javascript:void(0)" class="text-decoration-none" data-bs-target="#signin-modal" data-bs-toggle="modal">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Sign-up Modal -->
+
+    <!-- Header -->
+    <header class="primary-header" id="primary-header">
+        <div class="container d-flex justify-content-between align-items-center" id="header-container">
+            <!-- Brand -->
+            <a asp-controller="Home" asp-action="Index" class="d-flex gap-1 align-items-center text-decoration-none brand" title="Football Fans Platform">
+                <img class="logo" src="~/img/logo.png" alt="Wesite Icon">
+                <span class="fw-bold">FFP</span>
+            </a>
+            <!-- / Brand -->
+            <!-- Actions -->
+            <div class="d-flex align-items-center gap-3 gap-md-4 actions">
+                <i id="activate-search-btn" class="fa-solid fa-magnifying-glass fs-4 activate-search-btn action-icon"></i>
+                
+                <!-- Is Signed In ? -->
+                @if (true)
+                {
+                    <!-- If role is Admin -->
+                    @if (role == "Admin")
+                    {
+                        <a class="btn btn-primary-dark" asp-area="ControlPanel" asp-controller="Home" asp-action="Index">Dashboard</a>
+                    }
+                    else
+                    {
+                        <div class="dropdown header-action-dropdown-style">
+                            <a class="dropdown-toggle hide-arrow d-block fs-3 position-relative" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                <i class="fa-regular fa-bell action-icon"></i>
+                                <span class="position-absolute c-badge bg-danger">
+                                    9
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu notification-menu py-0 overflow-hidden" aria-labelledby="navbarDropdown">
+                                <li class="dropdown-menu-header border-bottom">
+                                    <div class="dropdown-header d-flex align-items-center py-3">
+                                        <h5 class="text-body me-auto mb-0 fw-bold">Notification</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <ul class="list-unstyled notifications c-scroll">
+                                        <li class="notification-item">
+                                            <div class="d-flex justify-content-between  px-3 pt-3">
+                                                <h4 class="mb-0 fw-normal fs-8">You Got it Right!</h4>
+                                                <button type="button" class="remove-notification-btn">
+                                                    <i class="fa-solid fa-xmark icon"></i>
+                                                </button>
+                                            </div>
+                                            <a class="dropdown-item d-block text-wrap px-3 pb-3" href="#">
+                                                <span class="notification-body">Your prediction of the match (Brazil VS Croatia) was right, Brazil won!</span>
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider my-0"></li>
+                                        <li class="notification-item">
+                                            <div class="d-flex justify-content-between  px-3 pt-3">
+                                                <h4 class="mb-0 fw-normal fs-8">You Got it Right!</h4>
+                                                <button type="button" class="remove-notification-btn">
+                                                    <i class="fa-solid fa-xmark icon"></i>
+                                                </button>
+                                            </div>
+                                            <a class="dropdown-item d-block text-wrap px-3 pb-3" href="#">
+                                                <span class="notification-body">Your prediction of the match (Brazil VS Croatia) was right, Brazil won!</span>
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider my-0"></li>
+                                        <li class="notification-item">
+                                            <div class="d-flex justify-content-between  px-3 pt-3">
+                                                <h4 class="mb-0 fw-normal fs-8">You Got it Right!</h4>
+                                                <button type="button" class="remove-notification-btn">
+                                                    <i class="fa-solid fa-xmark icon"></i>
+                                                </button>
+                                            </div>
+                                            <a class="dropdown-item d-block text-wrap px-3 pb-3" href="#">
+                                                <span class="notification-body">Your prediction of the match (Brazil VS Croatia) was right, Brazil won!</span>
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider my-0"></li>
+                                        <li class="notification-item">
+                                            <div class="d-flex justify-content-between  px-3 pt-3">
+                                                <h4 class="mb-0 fw-normal fs-8">You Got it Right!</h4>
+                                                <button type="button" class="remove-notification-btn">
+                                                    <i class="fa-solid fa-xmark icon"></i>
+                                                </button>
+                                            </div>
+                                            <a class="dropdown-item d-block text-wrap px-3 pb-3" href="#">
+                                                <span class="notification-body">Your prediction of the match (Brazil VS Croatia) was right, Brazil won!</span>
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider my-0"></li>
+                                        <li class="notification-item">
+                                            <div class="d-flex justify-content-between  px-3 pt-3">
+                                                <h4 class="mb-0 fw-normal fs-8">You Got it Right!</h4>
+                                                <button type="button" class="remove-notification-btn">
+                                                    <i class="fa-solid fa-xmark icon"></i>
+                                                </button>
+                                            </div>
+                                            <a class="dropdown-item d-block text-wrap px-3 pb-3" href="#">
+                                                <span class="notification-body">Your prediction of the match (Brazil VS Croatia) was right, Brazil won!</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><hr class="dropdown-divider my-0"></li>
+                                <li class="px-0">
+                                    <a class="dropdown-item d-flex justify-content-center p-2" href="#">
+                                        <span>Show All Notifications</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="dropdown header-action-dropdown-style">
+                            <a class="nav-link p-0 ps-1 hide-arrow" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                <img src="~/img/mazen2.png" class="rounded-action-img" />
+                            </a>
+                            <ul class="dropdown-menu profile-menu py-0 overflow-hidden" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item d-flex gap-2 py-3" href="#">
+                                        <img src="~/img/mazen2.png" class="rounded-action-img" />
+                                        <div class="d-flex flex-column ">
+                                            <span class="fw-bold">Mazen Salah</span>
+                                            <span class="text-secondary short-text">User, Author & Store Owner</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider my-0"></li>
+                                <li>
+                                    <a class="dropdown-item py-2 d-flex gap-3 align-items-center" href="#">
+                                        <i class="fa-solid fa-user"></i>
+                                        <span>My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 d-flex gap-3 align-items-center" href="#">
+                                        <i class="fa-solid fa-gear"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 d-flex gap-3 align-items-center" href="#">
+                                        <i class="fa-solid fa-pen"></i>
+                                        <span>Write a Post</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 d-flex gap-3 align-items-center" href="#">
+                                        <i class="fa-solid fa-store"></i>
+                                        <span>My Store</span>
+                                    </a>
+                                </li>
+
+                                <li><hr class="dropdown-divider my-0"></li>
+                                <li>
+                                    <a class="dropdown-item py-3 d-flex gap-3 align-items-center logout" href="#">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <span>Log out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div> 
+                    }
+                }
+                else
+                {
+                    <button class="btn btn-primary-dark activate-signin-btn" data-bs-toggle="modal" href="#signin-modal" type="button">Sign in</button>
+                }
+            </div>
+            <!-- / Actions -->
+            <!-- Search -->
+            <div id="search-functionality" class="search d-flex align-items-center">
+                <!-- Search Actions -->
+                <div class="d-flex align-items-center gap-3 gap-md-4 search-actions pe-2">
+                    <i class="fa-solid fa-arrow-left fs-3 action-icon deactivate-search-btn"></i>
+                    <i id="clear-search-btn" class="fa-solid fa-xmark fs-3 action-icon clear-search-btn"></i>
+                    <i class="fa-solid fa-magnifying-glass fs-4 search-icon"></i>
+                </div>
+                <!-- / Search Actions -->
+                <form id="search-form" class="search-form" action="" autocomplete="off">
+                    <div>
+                        <label for="input" class="d-none" aria-hidden="true">Search</label>
+                        <input id="search-field" class="search-field" type="text" placeholder="Search..">
+                    </div>
+                    <ul id="search-items-container" class="search-items p-0">
+                        <li>
+                            <a href="#">
+                                sdfasdfas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                sdfasdfas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                sdfasdfas
+                            </a>
+                        </li>
+
+                        <!-- Created from javascript -->
+                    </ul>
+                </form>
+            </div>
+            <!-- / Search -->
+        </div>
+    </header>
+    <!-- / Header -->
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-black py-lg-0">
+        <div class="container-fluid justify-content-end justify-content-lg-center">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex px-3 justify-content-center align-items-center @if(ViewData["Page"] == "Home") WriteLiteral("active");" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex px-3 justify-content-center align-items-center @if(ViewData["Page"] == "Fixtures") WriteLiteral("active");" asp-controller="Fixture" asp-action="Index">Fixtures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex px-3 justify-content-center align-items-center" href="#">Results</a>
+                    </li>
+                    @*<li class="nav-item dropdown">
+                        <a class="nav-link d-flex px-3 justify-content-center align-items-center dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Results
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Roshn Saudi League</a></li>
+                            <li><a class="dropdown-item" href="#">Champions League</a></li>
+                            <li><a class="dropdown-item" href="#">La Liga</a></li>
+                            <li><a class="dropdown-item" href="#">Premier League</a></li>
+                            <li><a class="dropdown-item" href="#">Seria A</a></li>
+                            <li><a class="dropdown-item" href="#">World Cup</a></li>
+                            <li><a class="dropdown-item" href="#">All</a></li>
+                        </ul>
+                    </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link d-flex px-3 justify-content-center align-items-center" href="#">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex px-3 justify-content-center align-items-center" href="#">Stores</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link d-flex px-3 justify-content-center align-items-center dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Games
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Short Quiz</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- / Navbar -->
+
+    <!-- Content -->
+    <div>
+        @RenderBody()
+    </div>
+    <!-- / Content -->
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-black primary-footer">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between py-3 px-5 footer-top">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <a asp-controller="" asp-action="" class="d-flex align-items-center gap-1 text-decoration-none footer-link">
+                    <img class="logo" src="~/img/logo.png" alt="Football Fan Platform" />
+                    <span class="fs-5 fw-bold">Football Fan Platform</span>
+                </a>
+            </div>
+            <!-- Left -->
+            <!-- Right -->
+            <div class="d-flex align-items-center gap-4">
+                <a href="https://www.facebook.com/masalah.tech/" target="_blank" class="sm-icon footer-link">
+                    <i class='bx bxl-facebook'></i>
+                </a>
+                <a href="https://www.linkedin.com/in/masalah-tech/" target="_blank" class="sm-icon footer-link">
+                    <i class='bx bxl-linkedin'></i>
+                </a>
+                <a href="https://www.instagram.com/mezo_san/" target="_blank" class="sm-icon footer-link">
+                    <i class='bx bxl-instagram'></i>
+                </a>
+                <a href="https://www.youtube.com/@@masalah-tech" target="_blank" class="sm-icon footer-link">
+                    <i class='bx bxl-youtube'></i>
+                </a>
+                <a href="https://github.com/masalah-tech" target="_blank" class="sm-icon footer-link">
+                    <i class='bx bxl-github'></i>
+                </a>
+                <a href="mailto:masalah.tech@gmail.com" class="sm-icon footer-link">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            About
+                        </h6>
+                        <p>
+                            Here, you find latest match fixtures, community
+                            for discussions, football-related items to buy or sell, some simple games,
+                            and much more!
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="d-md-block d-none col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Fixtures
+                        </h6>
+                        <p>
+                            <a href="#!" class="footer-link">Roshin League</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="footer-link">Champions League</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="footer-link">La Liga</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="footer-link">Premier League</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="footer-link">Seria A</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="d-md-block d-none col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="footer-link">Fixtures</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="footer-link">Community</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="footer-link">Stores</a>
+                        </p>
+                        <p>
+                            <a asp-controller="Home" asp-action="about" class="footer-link">About</a>
+                        </p>
+                        <p>
+                            <a asp-controller="Home" asp-action="Privacy" class="footer-link">Privacy Policy</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p>
+                            <i class="fas fa-envelope me-2 text-secondary"></i>
+                            <span>info@example.com</span>
+                        </p>
+                        <p>
+                            <i class="fas fa-phone me-2 text-secondary"></i>
+                            <span>+967 774 806 897</span>
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-arrow-up-right-from-square me-2 text-secondary"></i>
+                            <a href="#!" class="footer-link">Contact Form</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+        <!-- Copyright -->
+        <div class="text-center p-4 footer-bottom">
+            © 2023 Designed and Developed by
+            <a class="text-reset fw-bold" target="_blank" href="https://www.linkedin.com/in/masalah-tech/">Mazen Salah</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- / Footer -->
+
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/lib/bootstrap/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/0ce17fc271.js" crossorigin="anonymous"></script>
+
+    <!-- MZN -->
+    <script src="~/lib/mzn/js/mzn.js" asp-append-version="true"></script>
+
+    <!-- Custom JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

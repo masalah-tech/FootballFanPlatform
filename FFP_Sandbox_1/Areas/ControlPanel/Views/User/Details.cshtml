@@ -1,0 +1,68 @@
+﻿@using FFP
+@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model User
+
+@{
+    Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = $"{Model.FirstName} {Model.LastName}";
+    ViewData["Page"] = "Users";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="User" asp-action="Index"
+               class="text-decoration-none text-muted">User</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="User" asp-action="Index"
+               class="text-decoration-none text-muted">List</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">@{
+                WriteLiteral($"{Model.FirstName} {Model.LastName}");
+            }</li>
+    </ol>
+</nav>
+
+<div class="card px-0 py-3">
+    <form>
+        <div class="px-3 d-flex justify-content-between align-items-start">
+            @{
+                if (!string.IsNullOrWhiteSpace(Model.PhotoPath))
+                {
+                    <img src="@Model.PhotoPath" alt="@Model.FirstName" class="circular-user-photo Large" />
+                }
+                else
+                {
+                    <img src="~/img/user.png" alt="@Model.FirstName" class="circular-user-photo Large" />
+                }
+            }
+            <a asp-area="ControlPanel" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="mzn-btn-label-primary">Edit user details</a>
+        </div>
+        <hr />
+        <fieldset class="form-group border mt-4 px-1 pt-4 row mx-3">
+            <legend class="w-auto px-2">Primary Information</legend>
+            <div class="mb-3 col-md-6">
+                <label for="adminFirstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="adminFirstName" readonly value="@Model.FirstName">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="adminLastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="adminLastName" readonly value="@Model.LastName">
+            </div>
+        </fieldset>
+        <fieldset class="form-group border mt-4 px-1 pt-4 row mx-3">
+            <legend class="w-auto px-2">Credentials</legend>
+            <div class="mb-3 col-md-6">
+                <label for="adminUsername" class="form-label">Username</label>
+                <input type="text" class="form-control" id="adminUsername" readonly value="@Model.Username">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="adminPassword" class="form-label">Password</label>
+                <input type="text" class="form-control" id="adminPassword" readonly value="@Model.EncPassword">
+            </div>
+        </fieldset>
+    </form>
+</div>

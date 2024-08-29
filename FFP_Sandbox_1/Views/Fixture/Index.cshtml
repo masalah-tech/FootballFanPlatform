@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Fixtures";
+    ViewData["Page"] = "Fixtures";
+
+    bool isAdmin = true;
+
+}
+
+<div class="py-lg-4 px-lg-5">
+    <div class="row m-0 pt-2 pt-lg-0">
+        <main role="main" class="pb-3 p-0 col-xl-9">
+            <!-- Predictions -->
+            @foreach (var league in ViewBag.LeaguesHasPredictions)
+            {
+                <div class="content-space p-3 mb-3 card-container predicions">
+                    <h3>@league.Name</h3>
+                    <div class="mt-3 row px-2 pt-2">
+                        <div>
+                            @foreach (var futureMatch in ViewBag.futureMatches)
+                            {
+                                @if (futureMatch.LeagueId == league.Id) 
+                                {
+                                    <div class="card rounded-4 border-0 p-3 mb-3">
+                                        <div class="d-flex gap-3 align-items-center">
+                                            <div class="w-50 d-flex gap-3 justify-content-end align-items-center">
+                                                <span class="text-light club-name">@futureMatch.Club1.Name</span>
+                                                <div class="club-logo d-flex justify-content-end align-items-center">
+                                                    <img class="d-block h-100" src="@futureMatch.Club1.LogoPath" alt="@futureMatch.Club1.Name">
+                                                </div>
+                                            </div>
+                                            <div class="w-50 d-flex gap-3 align-items-center">
+                                                <div class="club-logo d-flex align-items-center">
+                                                    <img class="d-block h-100" src="@futureMatch.Club2.LogoPath" alt="@futureMatch.Club2.Name">
+                                                </div>
+                                                <span class="text-light club-name">@futureMatch.Club2.Name</span>
+                                            </div>
+                                        </div>
+                                        <div class="m-3">
+                                            <p class="text-light text-center m-0 p-0">@futureMatch.DateTime.ToString("dddd, dd MMMM yyyy h:mm tt")</p>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: @ViewBag.matchesPredictionPercentages[futureMatch.Id][1]%" aria-valuenow="@ViewBag.matchesPredictionPercentages[futureMatch.Id][1]" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="@futureMatch.Club1.Name" data-bs-custom-class="custom-tooltip">
+                                                @string.Format("{0:0.00}%", ViewBag.matchesPredictionPercentages[futureMatch.Id][1])
+                                            </div>
+                                            <div class="progress-bar bg-white text-black" role="progressbar" style="width: @ViewBag.matchesPredictionPercentages[futureMatch.Id][0]%" aria-valuenow="@ViewBag.matchesPredictionPercentages[futureMatch.Id][0]" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Draw" data-bs-custom-class="custom-tooltip">
+                                                @string.Format("{0:0.00}%", ViewBag.matchesPredictionPercentages[futureMatch.Id][0])
+                                            </div>
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: @ViewBag.matchesPredictionPercentages[futureMatch.Id][2]%" aria-valuenow="@ViewBag.matchesPredictionPercentages[futureMatch.Id][2]" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="@futureMatch.Club2.Name" data-bs-custom-class="custom-tooltip">
+                                                @string.Format("{0:0.00}%", ViewBag.matchesPredictionPercentages[futureMatch.Id][2])
+                                            </div>
+                                        </div>
+                                        <!-- If the user didn't add prediction yet' -->
+                                        <div class="mt-3 d-flex align-items-center justify-content-center">
+                                            @if(true)
+                                            {
+                                                <a class="d-flex align-items-center gap-1 c-link" data-bs-toggle="collapse" href="#match-@futureMatch.Id-pred-form" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    <span>Add your prediction</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <p class="m-0 text-info">
+                                                    @if (true)
+                                                    {
+                                                        <span>You predicted that @futureMatch.Club2.Name will win</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>You predicted that the result will be draw</span>
+                                                    }
+                                                </p>
+                                            }
+                                        </div>
+                                        <div class="collapse" id="match-@futureMatch.Id-pred-form">
+                                            <form class="pt-3 text-white d-flex flex-sm-row flex-column justify-content-center">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="match-@futureMatch.Id-club-1" value="option1">
+                                                    <label class="form-check-label" for="match-@futureMatch.Id-club-1">@futureMatch.Club1.Name</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="match-@futureMatch.Id-club-2" value="option2">
+                                                    <label class="form-check-label" for="match-@futureMatch.Id-club-2">@futureMatch.Club2.Name</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="match-@futureMatch.Id-draw" value="option2">
+                                                    <label class="form-check-label" for="match-@futureMatch.Id-draw">Draw</label>
+                                                </div>
+                                                <div class="mt-2 mt-sm-0">
+                                                    <button type="submit" class="d-flex align-items-center gap-1 c-link">
+                                                        <i class="fa-regular fa-floppy-disk"></i>
+                                                        <span>Save</span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- / Predictions -->
+        </main>
+        <aside class="col-xl-3">
+            <!-- If role is Admin -->
+            @if (isAdmin)
+            {
+                <div class="content-space p-3 mb-3 card-container">
+                    <h3>Actions</h3>
+                    <div class="mt-3">
+                        <div class="card rounded-0 border-0 p-3 mb-3">
+                            <a class="btn btn-primary-dark w-auto" asp-controller="" asp-action="">Add a Match</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="content-space p-3 mb-3">
+                <div class="d-flex justify-content-center align-items-center ad-space">
+                    <span>Ad Space</span>
+                </div>
+            </div>
+            <div class="content-space p-3 mb-3">
+                <div class="d-flex justify-content-center align-items-center ad-space">
+                    <span>Ad Space</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>

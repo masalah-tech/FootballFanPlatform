@@ -1,0 +1,2 @@
+store1-poster.jpg: https://nwscdn.com/media/catalog/product/cache/all/thumbnail/800x/0dc2d03fe217f8c83829496872af24a0/t/r/training-football-in-orange.jpg
+user.png: <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by kmg design - Flaticon</a>

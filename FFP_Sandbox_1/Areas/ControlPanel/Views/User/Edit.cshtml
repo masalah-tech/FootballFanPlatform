@@ -1,0 +1,84 @@
+﻿@using FFP
+@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model User
+
+@{
+    Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = $"Edit {Model.FirstName} {Model.LastName}";
+    ViewData["Page"] = "Users";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="User" asp-action="Index"
+               class="text-decoration-none text-muted">User</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="User" asp-action="Index"
+               class="text-decoration-none text-muted">List</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            @{
+                WriteLiteral($"Edit {Model.FirstName} {Model.LastName}");
+            }
+        </li>
+    </ol>
+</nav>
+
+<div class="card px-0 py-3">
+    <form>
+        <div class="px-3 mb-2 d-flex gap-3 align-items-center">
+            @{
+                if (!string.IsNullOrWhiteSpace(Model.PhotoPath))
+                {
+                    <img src="@Model.PhotoPath" alt="@Model.FirstName" class="circular-user-photo Large" />
+                }
+                else
+                {
+                    <img src="~/img/user.png" alt="@Model.FirstName" class="circular-user-photo Large" />
+                }
+            }
+            <div>
+                <label for="AdminPersonalPhoto" class="mzn-btn-label-primary">Upload new photo</label>
+                <input type="file" hidden accept="image/*" id="AdminPersonalPhoto" name="" />
+            </div>
+        </div>
+        <hr />
+        <fieldset class="form-group border mt-4 px-1 pt-4 row mx-3">
+            <legend class="w-auto px-2">Primary Information</legend>
+            <div class="mb-3 col-md-6">
+                <label for="adminFirstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="adminFirstName" value="@Model.FirstName">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="adminLastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="adminLastName" value="@Model.LastName">
+            </div>
+        </fieldset>
+        <fieldset class="form-group border mt-4 px-1 pt-4 row mx-3">
+            <legend class="w-auto px-2">Credentials</legend>
+            <div class="mb-3 col-md-6">
+                <label for="adminUsername" class="form-label">Username</label>
+                <input type="text" class="form-control" id="adminUsername" value="@Model.Username">
+            </div>
+            <div class="mb-3 mb-3 col-md-6">
+                <label for="adminPassword" class="form-label">Password</label>
+                <div class="mzn-eye-pass-box">
+                    <input type="password" id="adminPassword" value="@Model.EncPassword" class="form-control">
+                    <div class="mzn-pass-icon-wrapper">
+                        <i class="fa-solid fa-eye mzn-icon active show-pass-btn"></i>
+                        <i class="fa-solid fa-eye-slash mzn-icon hide-pass-btn"></i>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <hr />
+        <div class="mx-3">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a class="btn btn-secondary" asp-area="ControlPanel" asp-controller="User" asp-action="Edit">Reset</a>
+        </div>
+    </form>
+</div>

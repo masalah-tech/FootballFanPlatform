@@ -1,0 +1,133 @@
+﻿@using FFP
+@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Posts";
+    ViewData["Page"] = "Posts";
+}
+
+@model List<Post>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="Post" asp-action="Index"
+               class="text-decoration-none text-muted">Post</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">List</li>
+    </ol>
+</nav>
+
+<div>
+    <div class="card p-0">
+        <div class="mzn-datatable-wrapper header-border-top-0">
+            <table id="postsTable" class="table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Posted by</th>
+                        <th>Date</th>
+                        <th>Likes</th>
+                        <th>Comments</th>
+                        <th>Saves</th>
+                        <th>Reports</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var post in Model)
+                    {
+                        <tr>
+                            <td>@post.Id</td>
+                            <td>
+                                @{
+                                    if (!string.IsNullOrWhiteSpace(post.PosterPath))
+                                    {
+                                        <img src="@post.PosterPath" alt="@post.Title" class="post-img" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/img/no-img.png" alt="@post.Title" class="post-img" />
+                                    }
+                                }
+                            </td>
+                            <td class="min-w-200-px">@post.Title</td>
+                            <td class="min-w-300-px">
+                                <div class="mzn-three-lines-ellipsis">
+                                   @post.HTMLContent
+                                </div>
+                            </td>
+                            <td class="text-nowrap">
+                                <a class="text-decoration-none" asp-area="ControlPanel" asp-controller="User" asp-action="Details" asp-route-id="@post.User.Id">
+                                    @string.Format("{0} {1}", post.User.FirstName, post.User.LastName)
+                                </a>
+                            </td>
+                            <td class="text-nowrap">@post.Date.ToString("MMM d - yyyy")</td>
+                            <td class="text-center">
+                                <a asp-area="ControlPanel" asp-controller="Post" asp-action="Index" class="text-decoration-none" >
+                                    12
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a asp-area="ControlPanel" asp-controller="Post" asp-action="Index" class="text-decoration-none" >
+                                    12
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a asp-area="ControlPanel" asp-controller="Post" asp-action="Index" class="text-decoration-none" >
+                                    12
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a asp-area="ControlPanel" asp-controller="Post" asp-action="Index" class="text-decoration-none" >
+                                    12
+                                </a>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a class="fs-5 link-dark d-block w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">Show details</a></li>
+                                        <li><a class="dropdown-item link-danger" href="#">Delete the admin</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script>
+
+        $('#postsTable').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [1, 3, 5, 10],
+                    "orderable": false
+                },
+            ],
+            "initComplete": function (settings, json) {
+                const tableWrapper =  
+                    document.querySelector("div:has(> #postsTable)");
+
+                tableWrapper.classList.add("mzn-scroll");
+                tableWrapper.classList.add("mzn-x-scroll");
+            },
+        });
+
+    </script>
+}

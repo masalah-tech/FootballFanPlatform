@@ -1,0 +1,215 @@
+﻿@using FFP
+@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Post
+
+@{
+    Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Post Details";
+    ViewData["Page"] = "Posts";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="Post" asp-action="Index"
+               class="text-decoration-none text-muted">Post</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="Post" asp-action="Index"
+               class="text-decoration-none text-muted">List</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Post Details</li>
+    </ol>
+</nav>
+
+<div class="row">
+
+    <main class="col-xxl-9">
+        <div class="card px-0 pb-3">
+            <h3 class="mb-0 px-3 pt-2">@Model.Title</h3>
+            <hr />
+            @if (!string.IsNullOrWhiteSpace(Model.PosterPath))
+            {
+                <img src="@Model.PosterPath" alt="@Model.Title" class="px-3 post-img large mb-3" />
+            }
+            <div class="px-3">
+                @Html.Raw(Model.HTMLContent)
+            </div>
+        </div>
+        <div class="card px-0 mt-3 py-3">
+            <h3 class="mb-0 fs-4 px-3">
+                <span>Comments</span>
+                <span>(26)</span>
+            </h3>
+            <hr />
+            <div>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <div class="p-3 d-flex">
+                        <div class="me-3">
+                            <img src="~/img/user.png" alt="" class="circular-user-photo" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <span class="fw-bold">Osama Sameer</span>
+                            <p>
+                                Early in the season, when teams have new signups, and lot's of expectation
+                                to start the season on positive note's. This weekend looks competitive.
+                            </p>
+                            <hr class="my-1" />
+                            <div class="d-flex gap-3">
+                                <a asp-area="" asp-controller="" asp-action="" class="text-decoration-none">
+                                    <span>12</span>
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                </a>
+                                <a asp-area="" asp-controller="" asp-action="" class="text-decoration-none">
+                                    <span>12</span>
+                                    <i class="fa-regular fa-flag"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <hr class="mt-0" />
+            <div class="d-flex justify-content-center">
+                <a asp-area="" asp-controller="" asp-action="" class="text-decoration-none">Show all comments</a>
+            </div>
+        </div>
+        <div class="card px-2 mt-3 py-3">
+            <h3 class="mb-0 fs-4 px-3">
+                <span>Likes</span>
+                <span>(26)</span>
+            </h3>
+            <hr />
+            <div class="d-flex pb-2 gap-2 overflow-x-auto mzn-scroll mzn-x-scroll">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <a asp-area="" asp-controller="" asp-action="" asp-route-id="" class="p-2 text-decoration-none d-flex gap-1 flex-column align-items-center">
+                        <img src="~/img/user.png" alt="" class="circular-user-photo mid" />
+                        <span class="fs-0-8-rem text-nowrap">@@masalah-tech</span>
+                    </a>
+                }
+                <a asp-area="" asp-controller="" asp-action="" asp-route-id="" class="p-2 text-decoration-none d-flex gap-1 flex-column align-items-center">
+                    <div class="circular-btn-more-users">
+                        <span>+12</span>
+                    </div>
+                    <span class="fs-0-8-rem text-nowrap">Show more</span>
+                </a>
+            </div>
+        </div>
+        <div class="card px-2 mt-3 py-3">
+            <h3 class="mb-0 fs-4 px-3">
+                <span>Saves</span>
+                <span>(26)</span>
+            </h3>
+            <hr />
+            <div class="d-flex pb-2 gap-2 overflow-x-auto mzn-scroll mzn-x-scroll">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <a asp-area="" asp-controller="" asp-action="" asp-route-id="" class="p-2 text-decoration-none d-flex gap-1 flex-column align-items-center">
+                        <img src="~/img/user.png" alt="" class="circular-user-photo mid" />
+                        <span class="fs-0-8-rem text-nowrap">@@masalah-tech</span>
+                    </a>
+                }
+                <a asp-area="" asp-controller="" asp-action="" asp-route-id="" class="p-2 text-decoration-none d-flex gap-1 flex-column align-items-center">
+                    <div class="circular-btn-more-users">
+                        <span>+12</span>
+                    </div>
+                    <span class="fs-0-8-rem text-nowrap">Show more</span>
+                </a>
+            </div>
+        </div>
+        <div class="card px-2 mt-3 py-3">
+            <h3 class="mb-0 fs-4 px-3">
+                <span>Reports</span>
+                <span>(26)</span>
+            </h3>
+            <hr />
+            <div class="d-flex pb-2 gap-2 overflow-x-auto mzn-scroll mzn-x-scroll">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <a asp-area="" asp-controller="" asp-action="" asp-route-id="" class="p-2 text-decoration-none d-flex gap-1 flex-column align-items-center">
+                        <img src="~/img/user.png" alt="" class="circular-user-photo mid" />
+                        <span class="fs-0-8-rem text-nowrap">@@masalah-tech</span>
+                    </a>
+                }
+                <a asp-area="" asp-controller="" asp-action="" asp-route-id="" class="p-2 text-decoration-none d-flex gap-1 flex-column align-items-center">
+                    <div class="circular-btn-more-users">
+                        <span>+12</span>
+                    </div>
+                    <span class="fs-0-8-rem text-nowrap">Show more</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    <aside class="col-xxl-3 mt-3 mt-xxl-0">
+        <div class="card px-0">
+            <h3 class="fs-5 px-3">Metadata</h3>
+            <hr class="my-1" />
+            <div class="px-3">
+                <div class="d-flex gap-2 mb-2">
+                    <span class="fw-medium">Date:</span>
+                    <span class="text-secondary">
+                        @Model.Date.ToString("MMM d - yyyy")
+                    </span>
+                </div>
+                <div class="d-flex gap-2 mb-2">
+                    <span class="fw-medium">Time:</span>
+                    <span class="text-secondary">
+                        @Model.Date.ToString("h:MM tt")
+                    </span>
+                </div>
+                <div class="d-flex gap-2 mb-2">
+                    <span class="fw-medium">Posted by:</span>
+                    <a asp-area="ControlPanel" asp-controller="Admin"
+                       asp-action="Details" asp-route-id="@Model.User.Id"
+                       class="text-decoration-none">
+                        @string.Format("{0} {1}", Model.User.FirstName, Model.User.LastName)
+                    </a>
+                </div>
+                <div class="d-flex gap-2 mb-2">
+                    <span class="fw-medium">Likes:</span>
+                    <a asp-area="" asp-controller="" asp-action="" class="text-decoration-none">
+                        42
+                    </a>
+                </div>
+                <div class="d-flex gap-2 mb-2">
+                    <span class="fw-medium">Comments:</span>
+                    <a asp-area="" asp-controller="" asp-action="" class="text-decoration-none">
+                        42
+                    </a>
+                </div>
+                <div class="d-flex gap-2 mb-2">
+                    <span class="fw-medium">Saves:</span>
+                    <a asp-area="" asp-controller="" asp-action="" class="text-decoration-none">
+                        42
+                    </a>
+                </div>
+                <div class="d-flex gap-2 mb-2">
+                    <span class="fw-medium">Reports:</span>
+                    <a asp-area="" asp-controller="" asp-action="" class="text-decoration-none">
+                        42
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card px-0 mt-3 pb-3">
+            <h3 class="fs-5 px-3">Actions</h3>
+            <hr class="my-1" />
+            <div class="px-3 pt-2">
+                <a asp-area="" asp-controller="" asp-action="" 
+                    class="mzn-btn-label-warning d-block text-center">
+                    Disable the publisher
+                </a>
+                <a asp-area="" asp-controller="" asp-action="" 
+                    class="mzn-btn-label-danger d-block text-center mt-2">
+                    Delete the post
+                </a>
+
+            </div>
+        </div>
+    </aside>
+</div>

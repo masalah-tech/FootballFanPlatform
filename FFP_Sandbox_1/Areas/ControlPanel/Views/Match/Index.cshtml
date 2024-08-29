@@ -1,0 +1,199 @@
+﻿@using FFP
+@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Matches";
+    ViewData["Page"] = "Matches";
+}
+
+@model List<Match>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="Match" asp-action="Index"
+               class="text-decoration-none text-muted">Match</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">List</li>
+    </ol>
+</nav>
+
+<div id="addMatchModal" class="modal fade modal-lg" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Football Match</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <fieldset class="form-group border mt-2 px-3 pb-3 pt-4">
+                        <legend class="w-auto px-2">Primary Information</legend>
+                        <div class="mb-3">
+                            <label for="newUserFirstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="newUserFirstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newUserLastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="newUserLastName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newUserProfilePhoto" class="form-label">Profile Photo</label>
+                            <input class="form-control" type="file" accept="image/*" id="newUserProfilePhoto">
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group border mt-4 px-3 pb-3 pt-4">
+                        <legend class="w-auto px-2">Credentials</legend>
+                        <div class="mb-3">
+                            <label for="newUserUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="newUserUsername">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newUserPassword" class="form-label">Password</label>
+                            <div class="mzn-eye-pass-box">
+                                <input type="password" id="newUserPassword" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
+                                <div class="mzn-pass-icon-wrapper">
+                                    <i class="fa-solid fa-eye mzn-icon active show-pass-btn"></i>
+                                    <i class="fa-solid fa-eye-slash mzn-icon hide-pass-btn"></i>
+                                </div>
+                            </div>
+                            <div id="newAdminPasswordHelpBlock" class="form-text">
+                                The password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="card p-0">
+        <div class="p-3">
+            <a href="javascript:void(0)" data-bs-target="#addMatchModal" data-bs-toggle="modal" class="mzn-btn-label-primary">Add new match</a>
+        </div>
+        <div class="mzn-datatable-wrapper">
+            <table id="matchesTable" class="table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Club 1</th>
+                        <th>Club 1 Goals</th>
+                        <th>Club 2</th>
+                        <th>Club 2 Goals</th>
+                        <th>League</th>
+                        <th>Date &amp; Time</th>
+                        <th class="text-nowrap">Rating Average</th>
+                        <th>Ratings</th>
+                        <th>Predictions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var match in Model)
+                    {
+                        <tr>
+                            <td>@match.Id</td>
+                            <td>
+                                <a asp-area="ControlPanel" asp-controller="Club" asp-action="Details" 
+                                    asp-route-id="@match.Club1.Id" class="text-decoration-none">
+                                    @match.Club1.Name
+                                </a>
+                            </td>
+                            <td class="ps-4">
+                                @if (match.Club1Goals != null)
+                                {
+                                    WriteLiteral(match.Club1Goals);
+                                }
+                                else
+                                {
+                                    WriteLiteral("-");
+                                }
+                            </td>
+                            <td>
+                                <a asp-area="ControlPanel" asp-controller="Club" asp-action="Details" 
+                                    asp-route-id="@match.Club2.Id" class="text-decoration-none">
+                                    @match.Club2.Name
+                                </a>
+                            </td>
+                            <td class="ps-4">
+                                @if (match.Club2Goals != null)
+                                {
+                                    WriteLiteral(match.Club2Goals);
+                                }
+                                else
+                                {
+                                    WriteLiteral("-");
+                                }
+                            </td>
+                            <td>
+                                <a asp-area="ControlPanel" asp-controller="League" asp-action="Details"
+                                   asp-route-id="@match.League.Id" class="text-decoration-none">
+                                    @match.League.Name
+                                </a>
+                            </td>
+                            <td class="text-nowrap">@match.DateTime.ToString("MMM d - yyyy - h:mm tt")</td>
+                            <td class="text-center">9.2</td>
+                            <td class="ps-4">
+                                <a asp-area="ControlPanel" asp-controller="Rating" asp-action="Index" 
+                                    class="text-decoration-none">
+                                    127
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a asp-area="ControlPanel" asp-controller="Prediction" asp-action="Index" 
+                                    class="text-decoration-none">
+                                    127
+                                </a>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a class="fs-5 link-dark d-block w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Match" asp-action="Details" asp-route-id="@match.Id">Show details</a></li>
+                                        <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Match" asp-action="Edit" asp-route-id="@match.Id">Edit details</a></li>
+                                        <li><a class="dropdown-item link-danger" href="#">Delete the match</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script>
+
+        $('#matchesTable').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [10],
+                    "orderable": false
+                },
+            ],
+            "initComplete": function (settings, json) {
+                const tableWrapper =
+                    document.querySelector("div:has(> #matchesTable)");
+
+                tableWrapper.classList.add("mzn-scroll");
+                tableWrapper.classList.add("mzn-x-scroll");
+            },
+        });
+
+    </script>
+}

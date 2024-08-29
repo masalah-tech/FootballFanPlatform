@@ -1,0 +1,63 @@
+﻿@using FFP
+@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Admin Roles";
+    ViewData["Page"] = "AdminRoles";
+}
+
+@model List<AdminRole>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="AdminRole" asp-action="Index"
+               class="text-decoration-none text-muted">Admin Role</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">List</li>
+    </ol>
+</nav>
+
+<div>
+    <div class="card p-0">
+        <div class="mzn-datatable-wrapper header-border-top-0">
+            <table id="adminRolesTable" class="table " style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Belongs to</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var adminRole in Model)
+                    {
+                        <tr>
+                            <td>@adminRole.Id</td>
+                            <td>@adminRole.Title</td>
+                            <td>
+                                <a class="text-decoration-none" asp-area="ControlPanel" asp-controller="AdminRole" asp-action="RoleAdmins" asp-route-id="@adminRole.Id">
+                                    5
+                                </a>
+                            </td> 
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script>
+
+        $('#adminRolesTable').DataTable({
+        });
+
+    </script>
+}

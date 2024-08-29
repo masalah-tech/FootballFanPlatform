@@ -1,0 +1,96 @@
+﻿@using FFP
+@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model List<Admin>
+
+@{
+    Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = $"{Model[0].AdminRole.Title}s";
+    ViewData["Page"] = "AdminRoles";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="AdminRole" asp-action="Index"
+               class="text-decoration-none text-muted">Admin Role</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-area="ControlPanel" asp-controller="AdminRole" asp-action="Index"
+               class="text-decoration-none text-muted">List</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">@{
+                WriteLiteral(Model[0].AdminRole.Title);}s
+        </li>
+    </ol>
+</nav>
+
+<div class="row px-2">
+
+    @foreach (var admin in Model)
+    {
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 p-2">
+            <div class="card text-center p-0 overflow-hidden position-relative">
+                <div class="card-header d-flex justify-content-center bg-white p-3 border-0">
+                    <img src="@admin.PersonalPhotoPath" class="circular-user-photo Large" />
+                </div>
+                <hr class="m-0">
+                <div class="card-body">
+                    <h4 class="mzn-one-line-ellipsis">
+                        @{
+                            WriteLiteral($"{admin.FirstName} {admin.LastName}");
+                        }
+                    </h4>
+                    <p class="mzn-one-line-ellipsis">
+                        @@@admin.Username
+                    </p>
+                    <div class="py-3 text-start">
+                        <p class="mzn-one-line-ellipsis">
+                            @admin.Email
+                        </p>
+                        <p class="mzn-one-line-ellipsis">
+                            @admin.PhoneNumber
+                        </p>
+                        <p class="mzn-one-line-ellipsis">
+                            @admin.Address.Country / @admin.Address.City / @admin.Address.Street
+                        </p>
+                
+                    </div>
+
+                    <a asp-area="ControlPanel" asp-controller="Admin" asp-action="Details" asp-route-id="@admin.Id" class="d-block mzn-btn-label-primary">More details</a>
+
+                    <div class="dropdown position-absolute top-right-short-gap w-20-px">
+                        <a class="fs-5 link-dark d-block w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Admin" asp-action="Edit" asp-route-id="@admin.Id">Edit details</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    @{
+                                        if (admin.Status == true)
+                                        {
+                                            <span>Deactivate the user</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Activate the user</span>
+                                        }
+                                    }
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item link-danger" href="#">Delete the user</a></li>
+                        </ul>
+                    </div>
+                
+                    @*<a asp-area="ControlPanel" asp-controller="Admin" asp-action="Edit" asp-route-id="@admin.Id" class="mzn-btn-label-primary">Edit details</a>
+                    <a asp-area="" asp-controller="" asp-action="" class="mzn-btn-label-warning">Disable @string.Format("{0} {1}", admin.FirstName, admin.LastName)</a>
+                    <a asp-area="" asp-controller="" asp-action="" class="mzn-btn-label-danger">Delete @string.Format("{0} {1}", admin.FirstName, admin.LastName)</a>*@
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
