@@ -1,50 +1,37 @@
 ﻿using FFP.Data;
 using FFP.Models;
+using FFP.WebApp.Data.Crud;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
+using Saned.Data.Dapper;
 
 namespace FFP.Areas.ControlPanel.Controllers
 {
     [Area("ControlPanel")]
     public class AdminController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly AdminCrud crud;
 
-        public AdminController(AppDbContext context)
+        public AdminController()
         {
-            _context = context;
+            crud = new AdminCrud();
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var admins = 
-                _context.Admins
-                .Include(a => a.Address)
-                .Include(a => a.AdminRole)
-                .ToList();
+            IEnumerable<Admin> list = await crud.GetListAsync();
 
-            return View(admins);
+            return View(list);
         }
 
         public IActionResult Details(int id)
         {
-            Admin admin =
-                _context.Admins
-                .Include(a => a.Address)
-                .Include(a => a.AdminRole)
-                .FirstOrDefault()!;
-
-            return View(admin);
+            return View();
         }
 
         public IActionResult Edit(int id)
         {
-            Admin admin =
-                _context.Admins
-                .Include(a => a.Address)
-                .Include(a => a.AdminRole)
-                .FirstOrDefault()!;
-
-            return View(admin);
+            return View();
         }
 
 
