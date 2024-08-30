@@ -7,126 +7,15 @@
 
 @model List<Admin>
 
-<div id="addAdminModal" class="modal fade modal-lg" tabindex="-1" data-bs-backdrop="static">
+<div id="addAdminModal" class="modal fade modal-lg" >
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h5 class="modal-title">Add New Admin</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <fieldset class="form-group border mt-2 px-3 pb-3 pt-4">
-                        <legend class="w-auto px-2">Primary Information</legend>
-                        <div class="mb-3">
-                            <label for="newAdminRole" class="form-label">Role</label>
-                            <select id="newAdminRole" class="form-select">
-                                <option selected>-- Choose Role --</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminFirstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="newAdminFirstName">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminSecondName" class="form-label">Second Name</label>
-                            <input type="text" class="form-control" id="newAdminSecondName">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminThirdName" class="form-label">Third Name</label>
-                            <input type="text" class="form-control" id="newAdminThirdName">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminLastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="newAdminLastName">
-                        </div>
-                        <div class="mb-3 mzn-select-box">
-                            <label for="newAdminNationality" class="form-label">Nationality</label>
-                            <div class="mzn-select-option">
-                                <input class="mzn-selected-item form-control" type="text" id="newAdminNationality" readonly name="newAdminNationality" value="Select" />
-                            </div>
-                            <div class="mzn-select-items-container">
-                                <div class="mzn-search-select-items-input-wrapper">
-                                    <input class="mzn-search-select-items-input" type="text" id="optionSearch" autocomplete="off" />
-                                </div>
-                                <ul class="load-countries">
-                                    <li class="mzn-select-item active">Select</li>
-                                </ul>
-                                <p class="mzn-no-match-msg">No results found</p>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminBirthDate" class="form-label">Birth Date</label>
-                            <input type="date" class="form-control" id="newAdminBirthDate">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminPersonalPhoto" class="form-label">Personal Photo</label>
-                            <input class="form-control" type="file" accept="image/*" id="newAdminPersonalPhoto">
-                        </div>
-                    </fieldset>
-                    <fieldset class="form-group border mt-4 px-3 pb-3 pt-4">
-                        <legend class="w-auto px-2">Contact Details</legend>
-                        <div class="mb-3">
-                            <label for="newAdminPhoneNo" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" id="newAdminPhoneNo">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="newAdminEmail">
-                        </div>
-                    </fieldset>
-                    <fieldset class="form-group border mt-4 px-3 pb-3 pt-4">
-                        <legend class="w-auto px-2">Address Details</legend>
-                        <div class="mb-3">
-                            <label for="newAdminAddressCountry" class="form-label">Country</label>
-                            <input type="text" class="form-control" id="newAdminAddressCountry">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminCity" class="form-label">City</label>
-                            <input type="text" class="form-control" id="newAdminCity">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminStreet" class="form-label">Street</label>
-                            <input type="text" class="form-control" id="newAdminStreet">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminAppartmentNo" class="form-label">Appartment No</label>
-                            <input type="number" class="form-control" id="newAdminAppartmentNo">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminZipCode" class="form-label">Zip Code</label>
-                            <input type="number" class="form-control" id="newAdminZipCode">
-                        </div>
-                    </fieldset>
-                    <fieldset class="form-group border mt-4 px-3 pb-3 pt-4">
-                        <legend class="w-auto px-2">Credentials</legend>
-                        <div class="mb-3">
-                            <label for="newAdminUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="newAdminUsername">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newAdminPassword" class="form-label">Password</label>
-                            <div class="mzn-eye-pass-box">
-                                <input type="password" id="newAdminPassword" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
-                                <div class="mzn-pass-icon-wrapper">
-                                    <i class="fa-solid fa-eye mzn-icon active show-pass-btn"></i>
-                                    <i class="fa-solid fa-eye-slash mzn-icon hide-pass-btn"></i>
-                                </div>
-                            </div>
-                            <div id="newAdminPasswordHelpBlock" class="form-text">
-                                The password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
         </div>
     </div>
 </div>
@@ -135,8 +24,8 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a asp-area="ControlPanel" asp-controller="Admin" asp-action="Index"
-                class="text-decoration-none text-muted">Admin</a>
-            </li>
+               class="text-decoration-none text-muted">Admin</a>
+        </li>
         <li class="breadcrumb-item active" aria-current="page">List</li>
     </ol>
 </nav>
@@ -144,9 +33,9 @@
 <div>
     <div class="card p-0">
         <div class="p-3">
-            <a href="javascript:void(0)" data-bs-target="#addAdminModal" data-bs-toggle="modal" class="mzn-btn-label-primary">Add new admin</a>
+            <a href="javascript:void(0)" class="btn-label-primary" onclick="showUpsertModal()">Add new admin</a>
         </div>
-        <div class="mzn-datatable-wrapper">
+        <div class="c-datatable-wrapper">
             <table id="adminsTable" class="table " style="width:100%">
                 <thead>
                     <tr>
@@ -168,7 +57,7 @@
                             <td>
                                 <img src="@admin.PersonalPhotoPath" alt="@admin.FirstName" class="circular-user-photo" />
                             </td>
-                            <td class="text-nowrap">@string.Format("{0} {1} {2} {3}",admin.FirstName, admin.SecondName, admin.ThirdName, admin.LastName)</td>
+                            <td class="text-nowrap">@string.Format("{0} {1} {2} {3}", admin.FirstName, admin.SecondName, admin.ThirdName, admin.LastName)</td>
                             <td class="text-nowrap">@admin.AdminRole.Title</td>
                             <td class="text-nowrap">@admin.Username</td>
                             <td class="text-nowrap">@admin.EncPassword</td>
@@ -176,11 +65,11 @@
                                 @{
                                     if (admin.Status == true)
                                     {
-                                        <span class="text-success">Active</span>
+                                            <span class="text-success">Active</span>
                                     }
                                     else
                                     {
-                                        <span class="text-danger">Inactive</span>
+                                            <span class="text-danger">Inactive</span>
                                     }
                                 }
                             </td>
@@ -198,11 +87,11 @@
                                                 @{
                                                     if (admin.Status == true)
                                                     {
-                                                        <span>Deactivate the admin</span>
+                                                            <span>Deactivate the admin</span>
                                                     }
                                                     else
                                                     {
-                                                        <span>Activate the admin</span>
+                                                            <span>Activate the admin</span>
                                                     }
                                                 }
                                             </a>
@@ -219,11 +108,22 @@
     </div>
 </div>
 
+<select class="js-example-basic-single" name="state">
+    <option value="AL">Alabama</option>
+    ...
+    <option value="WY">Wyoming</option>
+</select>
+
 
 
 @section Scripts {
 
     <script>
+
+        $('.js-example-basic-single').select2({
+            theme: "bootstrap4",
+            placeholder: 'Select an option'
+        });
 
         $('#adminsTable').DataTable({
             "columnDefs": [
@@ -240,6 +140,22 @@
                 tableWrapper.classList.add("mzn-x-scroll");
             },
         });
+
+        function showUpsertModal(id = 0) {
+            $(`#addAdminModal`).modal(`show`);
+            $(`#addAdminModal .modal-title`).html("Add New Admin");
+
+            $(`#addAdminModal .modal-body`).html(`<div class="loader"><div class="dots"></div></div>`);
+            $(`#addAdminModal .modal-body`).load("@Url.Action("Upsert")" + (id !== null && id !== undefined ? `?id=${id}` : ""),
+                function (responseText, textStatus, XMLHttpRequest) {
+                    if (textStatus == "success") {
+                        
+                    }
+                    else {
+                        console.log(`Something went wrong while fetching data`);
+                    }
+                });
+        }
 
     </script>
 }

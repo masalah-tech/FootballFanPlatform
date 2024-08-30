@@ -6,7 +6,7 @@
 async function main() {
     await intialize().then(value => {
         applyEvents();
-        mznApplyEvents();
+        //mznApplyEvents();
         applyUtilities();
         enableBootstrapTooltips();
     })
@@ -18,6 +18,14 @@ async function intialize() {
     const response = await fetch("/json/countries.json");
     const countries = await response.json();
     let counter = 0;
+
+    $('#addAdminModal').on('shown.bs.modal', function () {
+        $('.select2').select2({
+            theme: "bootstrap-5",
+            placeholder: 'Select an option',
+            dropdownParent: $(this)
+        });
+    });
 
     document.querySelectorAll(".mzn-select-box .load-countries").forEach(ulCountries => {
 

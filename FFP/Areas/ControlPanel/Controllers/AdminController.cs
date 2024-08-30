@@ -34,6 +34,9 @@ namespace FFP.Areas.ControlPanel.Controllers
             return View();
         }
 
-
+        public async Task<IActionResult> Upsert(int id)
+        {
+            return PartialView();
+        }
     }
 }
