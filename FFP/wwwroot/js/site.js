@@ -20,6 +20,7 @@ async function intialize() {
     let counter = 0;
 
     $('#addAdminModal').on('shown.bs.modal', function () {
+        main()
         $('.select2').select2({
             theme: "bootstrap-5",
             placeholder: 'Select an option',
@@ -133,12 +134,14 @@ function applyEvents() {
     });
 
     fileInputs.forEach(fileInput => {
-        fileInput.addEventListener("change", fileInputsChangeEvent => {
-            const outerBox = fileInput.parentElement.parentElement;
 
-            outerBox.querySelector("img").src = URL.createObjectURL(fileInput.files[0]);
+        if (fileInput.classList.contains("editable-profile-photo")) {
+            fileInput.addEventListener("change", fileInputsChangeEvent => {
+                const outerBox = fileInput.parentElement;
+                outerBox.querySelector("img").src = URL.createObjectURL(fileInput.files[0]);
+            });
+        }
 
-        });
     });
 }
 
