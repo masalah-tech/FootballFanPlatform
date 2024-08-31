@@ -16,7 +16,7 @@
         </div>
         <hr />
         <div class="col-md-6 mb-3">
-            <label asp-for="AdminRoleId" class="form-label">Role</label>
+            <label asp-for="AdminRoleId" class="form-label"></label>
             <select asp-for="AdminRoleId" class="form-control select2">
                 <option selected disabled>-- Choose Role --</option>
                 <option value="1">One</option>
@@ -26,34 +26,34 @@
             <span asp-validation-for="AdminRoleId" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="FirstName" class="form-label">First Name</label>
-            <input asp-for="FirstName" class="form-control" id="newAdminFirstName">
+            <label asp-for="FirstName" class="form-label"></label>
+            <input asp-for="FirstName" class="form-control">
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="SecondName" class="form-label">Second Name</label>
-            <input asp-for="SecondName" class="form-control" id="newAdminSecondName">
+            <label asp-for="SecondName" class="form-label"></label>
+            <input asp-for="SecondName" class="form-control">
             <span asp-validation-for="SecondName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="ThirdName" class="form-label">Third Name</label>
-            <input asp-for="ThirdName" class="form-control" id="newAdminThirdName">
+            <label asp-for="ThirdName" class="form-label"></label>
+            <input asp-for="ThirdName" class="form-control">
             <span asp-validation-for="ThirdName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="LastName" class="form-label">Last Name</label>
-            <input asp-for="LastName" class="form-control" id="newAdminLastName">
+            <label asp-for="LastName" class="form-label"></label>
+            <input asp-for="LastName" class="form-control">
             <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="Nationality" class="form-label">Nationality</label>
+            <label asp-for="Nationality" class="form-label"></label>
             <select asp-for="Nationality" class="form-control select2 countries-dropdown">
                 <option selected disabled>-- Choose Nationality --</option>
             </select>
             <span asp-validation-for="Nationality" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="BirthDate" class="form-label">Birth Date</label>
+            <label asp-for="BirthDate" class="form-label"></label>
             <input asp-for="BirthDate" type="date" class="form-control">
             <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
@@ -61,12 +61,12 @@
     <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Contact Details</legend>
         <div class="col-md-6 mb-3">
-            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+            <label asp-for="PhoneNumber" class="form-label"></label>
             <input asp-for="PhoneNumber" class="form-control">
             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="Email" class="form-label">Email</label>
+            <label asp-for="Email" class="form-label"></label>
             <input asp-for="Email" class="form-control" id="newAdminEmail">
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
@@ -74,27 +74,29 @@
     <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Address Details</legend>
         <div class="col-md-6 mb-3">
-            <label asp-for="Address.Country" class="form-label">Country</label>
-            <input asp-for="Address.Country" class="form-control">
+            <label asp-for="Address.Country" class="form-label"></label>
+            <select asp-for="Address.Country" class="form-control select2 countries-dropdown">
+                <option selected disabled>-- Choose Country --</option>
+            </select>
             <span asp-validation-for="Address.Country" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="Address.City" class="form-label">City</label>
+            <label asp-for="Address.City" class="form-label"></label>
             <input asp-for="Address.City" class="form-control">
             <span asp-validation-for="Address.City" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="Address.Street" class="form-label">Street</label>
+            <label asp-for="Address.Street" class="form-label"></label>
             <input asp-for="Address.Street" class="form-control">
             <span asp-validation-for="Address.Street" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="Address.AppartmentNo" class="form-label">Appartment No</label>
+            <label asp-for="Address.AppartmentNo" class="form-label"></label>
             <input asp-for="Address.AppartmentNo" class="form-control">
             <span asp-validation-for="Address.AppartmentNo" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="Address.ZipCode" class="form-label">Zip Code</label>
+            <label asp-for="Address.ZipCode" class="form-label"></label>
             <input asp-for="Address.ZipCode" class="form-control">
             <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
         </div>
@@ -102,12 +104,12 @@
     <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Credentials</legend>
         <div class="col-md-6 mb-3">
-            <label asp-for="Username" class="form-label">Username</label>
+            <label asp-for="Username" class="form-label"></label>
             <input asp-for="Username" class="form-control">
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label asp-for="EncPassword" class="form-label">Password</label>
+            <label asp-for="EncPassword" class="form-label"></label>
             <div class="c-eye-pass-box">
                 <input asp-for="EncPassword" type="password" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
                 <div class="c-pass-icon-wrapper">
