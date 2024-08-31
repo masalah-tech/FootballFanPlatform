@@ -9,7 +9,8 @@ namespace FFP.Models
         public int Id { get; set; }
         [Required]
         public string Username { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Password is required.")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$", ErrorMessage = "Password must be 8-20 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.")]
         public string EncPassword { get; set; }
         [Required]
         [ForeignKey("AdminRole")]
@@ -25,7 +26,8 @@ namespace FFP.Models
         public string LastName { get; set; }
         [Required]
         [Column(TypeName = "Date")]
-        public DateTime BirthDate { get; set; }
+        [Range(typeof(DateTime), "1900-01-01", "2024-12-31", ErrorMessage = "Birth Date must be between January 1, 1900, and December 31, 2024.")]
+        public DateTime BirthDate { get; set; } = new DateTime(2000, 1, 1);
         [Required]
         public string PersonalPhotoPath { get; set; }
         [Required]

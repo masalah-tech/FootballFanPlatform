@@ -16,20 +16,19 @@
         </div>
         <hr />
         <div class="col-md-6 mb-3">
-            <div>
-                <label asp-for="AdminRoleId" class="form-label">Role</label>
-                <select asp-for="AdminRoleId" class="form-control select2">
-                    <option selected disabled>-- Choose Role --</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
+            <label asp-for="AdminRoleId" class="form-label">Role</label>
+            <select asp-for="AdminRoleId" class="form-control select2">
+                <option selected disabled>-- Choose Role --</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
             <span asp-validation-for="AdminRoleId" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminFirstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="newAdminFirstName">
+            <label asp-for="FirstName" class="form-label">First Name</label>
+            <input asp-for="FirstName" class="form-control" id="newAdminFirstName">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
             <label asp-for="SecondName" class="form-label">Second Name</label>
@@ -37,76 +36,86 @@
             <span asp-validation-for="SecondName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminThirdName" class="form-label">Third Name</label>
-            <input type="text" class="form-control" id="newAdminThirdName">
+            <label asp-for="ThirdName" class="form-label">Third Name</label>
+            <input asp-for="ThirdName" class="form-control" id="newAdminThirdName">
+            <span asp-validation-for="ThirdName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminLastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="newAdminLastName">
+            <label asp-for="LastName" class="form-label">Last Name</label>
+            <input asp-for="LastName" class="form-control" id="newAdminLastName">
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="nationality" class="form-label">Nationality</label>
-            <select id="nationality" class="form-control select2 countries-dropdown">
+            <label asp-for="Nationality" class="form-label">Nationality</label>
+            <select asp-for="Nationality" class="form-control select2 countries-dropdown">
                 <option selected disabled>-- Choose Nationality --</option>
             </select>
+            <span asp-validation-for="Nationality" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminBirthDate" class="form-label">Birth Date</label>
-            <input type="date" class="form-control" id="newAdminBirthDate">
+            <label asp-for="BirthDate" class="form-label">Birth Date</label>
+            <input asp-for="BirthDate" type="date" class="form-control">
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
     </fieldset>
     <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Contact Details</legend>
         <div class="col-md-6 mb-3">
-            <label for="newAdminPhoneNo" class="form-label">Phone Number</label>
-            <input type="text" class="form-control" id="newAdminPhoneNo">
+            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="newAdminEmail">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" id="newAdminEmail">
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </fieldset>
     <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Address Details</legend>
         <div class="col-md-6 mb-3">
-            <label for="newAdminAddressCountry" class="form-label">Country</label>
-            <input type="text" class="form-control" id="newAdminAddressCountry">
+            <label asp-for="Address.Country" class="form-label">Country</label>
+            <input asp-for="Address.Country" class="form-control">
+            <span asp-validation-for="Address.Country" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminCity" class="form-label">City</label>
-            <input type="text" class="form-control" id="newAdminCity">
+            <label asp-for="Address.City" class="form-label">City</label>
+            <input asp-for="Address.City" class="form-control">
+            <span asp-validation-for="Address.City" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminStreet" class="form-label">Street</label>
-            <input type="text" class="form-control" id="newAdminStreet">
+            <label asp-for="Address.Street" class="form-label">Street</label>
+            <input asp-for="Address.Street" class="form-control">
+            <span asp-validation-for="Address.Street" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminAppartmentNo" class="form-label">Appartment No</label>
-            <input type="number" class="form-control" id="newAdminAppartmentNo">
+            <label asp-for="Address.AppartmentNo" class="form-label">Appartment No</label>
+            <input asp-for="Address.AppartmentNo" class="form-control">
+            <span asp-validation-for="Address.AppartmentNo" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminZipCode" class="form-label">Zip Code</label>
-            <input type="number" class="form-control" id="newAdminZipCode">
+            <label asp-for="Address.ZipCode" class="form-label">Zip Code</label>
+            <input asp-for="Address.ZipCode" class="form-control">
+            <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
         </div>
     </fieldset>
     <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Credentials</legend>
         <div class="col-md-6 mb-3">
-            <label for="newAdminUsername" class="form-label">Username</label>
-            <input type="text" class="form-control" id="newAdminUsername">
+            <label asp-for="Username" class="form-label">Username</label>
+            <input asp-for="Username" class="form-control">
+            <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminPassword" class="form-label">Password</label>
+            <label asp-for="EncPassword" class="form-label">Password</label>
             <div class="c-eye-pass-box">
-                <input type="password" id="newAdminPassword" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
+                <input asp-for="EncPassword" type="password" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
                 <div class="c-pass-icon-wrapper">
                     <i class="fa-solid fa-eye c-icon active show-pass-btn"></i>
                     <i class="fa-solid fa-eye-slash c-icon hide-pass-btn"></i>
                 </div>
             </div>
-            <div id="newAdminPasswordHelpBlock" class="form-text">
-                The password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-            </div>
+            <span asp-validation-for="EncPassword" class="text-danger"></span>
         </div>
     </fieldset>
     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
