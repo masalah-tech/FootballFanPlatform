@@ -36,7 +36,13 @@ namespace FFP.Areas.ControlPanel.Controllers
 
         public async Task<IActionResult> Upsert(int id)
         {
-            return PartialView();
+            return PartialView(new Admin());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upsert(Admin model, IFormFile adminPhoto)
+        {
+            return PartialView(new Admin());
         }
     }
 }

@@ -28,26 +28,10 @@ async function intialize() {
         });
     });
 
-    document.querySelectorAll(".mzn-select-box .load-countries").forEach(ulCountries => {
-
-        const outerBox = ulCountries.parentElement.parentElement;
-        const defaultSelectedCountry
-            = outerBox.querySelector(".mzn-select-option input").value;
-
+    document.querySelectorAll(".countries-dropdown").forEach(elemCountries => {
         for (let country of countries) {
-            if (country['name'] == defaultSelectedCountry) {
-                ulCountries.innerHTML += `<li class='mzn-select-item active'>${country['name']}</li>`;
-                counter++;
-            }
-            else {
-                ulCountries.innerHTML += `<li class='mzn-select-item'>${country['name']}</li>`;
-            }
+            elemCountries.innerHTML += `<option value="${country['code']}">${country['name']}</option>`;
         }
-
-        if (counter > 0) {
-            outerBox.querySelector("li:first-child").classList.remove("active");
-        }
-
     });
 
 }
@@ -100,6 +84,17 @@ function applyEvents() {
             {
                 clearSearchField();
                 deactivateSearchTypingMode();
+            }
+
+            if (iElement.classList.contains("show-pass-btn")) {
+                const outerBox = iElement.parentElement.parentElement;
+
+                showPassText(outerBox);
+            }
+            else if (iElement.classList.contains("hide-pass-btn")) {
+                const outerBox = iElement.parentElement.parentElement;
+
+                hidePassText(outerBox);
             }
         });
     })
@@ -229,4 +224,28 @@ function setProductSliderProperties() {
             next.children(':first-child').clone().appendTo($(this));
         }
     });
+}
+
+// showPassText(outerBox) replaces the dots in the password
+//      input field with the actual text
+function showPassText(outerBox) {
+    const input = outerBox.querySelector("input")
+
+    input.setAttribute("type", "text");
+    outerBox.querySelector(".show-pass-btn").classList.remove("active");
+    outerBox.querySelector(".hide-pass-btn").classList.add("active");
+
+    input.focus();
+}
+
+// hidePassText(outerBox) replaces the text in the password
+//      input field with dots
+function hidePassText(outerBox) {
+    const input = outerBox.querySelector("input");
+
+    input.setAttribute("type", "password");
+    outerBox.querySelector(".hide-pass-btn").classList.remove("active");
+    outerBox.querySelector(".show-pass-btn").classList.add("active");
+
+    input.focus();
 }

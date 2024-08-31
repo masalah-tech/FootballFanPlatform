@@ -1,5 +1,9 @@
-﻿<form>
-    <fieldset class="form-group border my-2 mx-1 px-2 pb-2 pt-4 row">
+﻿@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Admin
+
+<form method="post" onsubmit="handleUpsertSubmit(this, event)">
+    <fieldset class="form-group border mt-2 mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Primary Information</legend>
         <div class="mb-3">
             <div class="profile-photo-wrapper">
@@ -7,26 +11,30 @@
                 <label for="admin-profile-photo" class="overlay edit-btn">
                     <i class='bx bxs-edit'></i>
                 </label>
-                <input class="editable-profile-photo" id="admin-profile-photo" type="file" accept="image/*" />
+                <input class="editable-profile-photo" id="admin-profile-photo" type="file" accept="image/*" name="adminPhoto" />
             </div>
         </div>
         <hr />
         <div class="col-md-6 mb-3">
-            <label for="newAdminRole" class="form-label">Role</label>
-            <select id="newAdminRole" class="form-control select2">
-                <option selected disabled>-- Choose Role --</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+            <div>
+                <label asp-for="AdminRoleId" class="form-label">Role</label>
+                <select asp-for="AdminRoleId" class="form-control select2">
+                    <option selected disabled>-- Choose Role --</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <span asp-validation-for="AdminRoleId" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
             <label for="newAdminFirstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="newAdminFirstName">
         </div>
         <div class="col-md-6 mb-3">
-            <label for="newAdminSecondName" class="form-label">Second Name</label>
-            <input type="text" class="form-control" id="newAdminSecondName">
+            <label asp-for="SecondName" class="form-label">Second Name</label>
+            <input asp-for="SecondName" class="form-control" id="newAdminSecondName">
+            <span asp-validation-for="SecondName" class="text-danger"></span>
         </div>
         <div class="col-md-6 mb-3">
             <label for="newAdminThirdName" class="form-label">Third Name</label>
@@ -38,11 +46,8 @@
         </div>
         <div class="col-md-6 mb-3">
             <label for="nationality" class="form-label">Nationality</label>
-            <select id="nationality" class="form-control select2">
+            <select id="nationality" class="form-control select2 countries-dropdown">
                 <option selected disabled>-- Choose Nationality --</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
             </select>
         </div>
         <div class="col-md-6 mb-3">
@@ -50,7 +55,7 @@
             <input type="date" class="form-control" id="newAdminBirthDate">
         </div>
     </fieldset>
-    <fieldset class="form-group border mt-4 px-3 pb-3 pt-4">
+    <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Contact Details</legend>
         <div class="col-md-6 mb-3">
             <label for="newAdminPhoneNo" class="form-label">Phone Number</label>
@@ -61,7 +66,7 @@
             <input type="email" class="form-control" id="newAdminEmail">
         </div>
     </fieldset>
-    <fieldset class="form-group border mt-4 px-3 pb-3 pt-4">
+    <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Address Details</legend>
         <div class="col-md-6 mb-3">
             <label for="newAdminAddressCountry" class="form-label">Country</label>
@@ -84,19 +89,19 @@
             <input type="number" class="form-control" id="newAdminZipCode">
         </div>
     </fieldset>
-    <fieldset class="form-group border mt-4 px-3 pb-3 pt-4">
+    <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
         <legend class="w-auto px-2">Credentials</legend>
-        <div class="mb-3">
+        <div class="col-md-6 mb-3">
             <label for="newAdminUsername" class="form-label">Username</label>
             <input type="text" class="form-control" id="newAdminUsername">
         </div>
-        <div class="mb-3">
+        <div class="col-md-6 mb-3">
             <label for="newAdminPassword" class="form-label">Password</label>
-            <div class="mzn-eye-pass-box">
+            <div class="c-eye-pass-box">
                 <input type="password" id="newAdminPassword" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
-                <div class="mzn-pass-icon-wrapper">
-                    <i class="fa-solid fa-eye mzn-icon active show-pass-btn"></i>
-                    <i class="fa-solid fa-eye-slash mzn-icon hide-pass-btn"></i>
+                <div class="c-pass-icon-wrapper">
+                    <i class="fa-solid fa-eye c-icon active show-pass-btn"></i>
+                    <i class="fa-solid fa-eye-slash c-icon hide-pass-btn"></i>
                 </div>
             </div>
             <div id="newAdminPasswordHelpBlock" class="form-text">
@@ -107,3 +112,5 @@
     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<partial name="_ValidationScriptsPartial" />

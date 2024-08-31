@@ -1,4 +1,5 @@
 ﻿@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Admins";
@@ -7,7 +8,7 @@
 
 @model List<Admin>
 
-<div id="addAdminModal" class="modal fade modal-lg" >
+<div id="addAdminModal" class="modal fade modal-lg" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,16 +109,8 @@
     </div>
 </div>
 
-<select class="js-example-basic-single" name="state">
-    <option value="AL">Alabama</option>
-    ...
-    <option value="WY">Wyoming</option>
-</select>
-
-
-
 @section Scripts {
-
+    
     <script>
 
         $('.js-example-basic-single').select2({
@@ -155,6 +148,17 @@
                         console.log(`Something went wrong while fetching data`);
                     }
                 });
+        }
+
+        function handleUpsertSubmit(senderForm, event) {
+
+            event.preventDefault();
+
+            if (!$(senderForm).valid()) {
+                return;
+            }
+
+            $(`#addAdminModal .modal-body`).html(`<div class="loader"><div class="dots"></div></div>`);
         }
 
     </script>
