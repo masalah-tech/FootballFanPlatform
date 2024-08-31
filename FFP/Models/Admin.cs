@@ -18,7 +18,7 @@ namespace FFP.Models
         [ForeignKey("AdminRole")]
         [DisplayName("Role")]
         public int AdminRoleId { get; set; }
-        public AdminRole AdminRole { get; set; }
+        public AdminRole AdminRole { get; set; } = new AdminRole();
         [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
@@ -47,8 +47,8 @@ namespace FFP.Models
         [Required]
         [ForeignKey("Address")]
         public int AddressId { get; set; }
-        public Address Address { get; set; }
+        public Address Address { get; set; } = new Address();
         [Required]
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
     }
 }

@@ -17,11 +17,8 @@
         <hr />
         <div class="col-md-6 mb-3">
             <label asp-for="AdminRoleId" class="form-label"></label>
-            <select asp-for="AdminRoleId" class="form-control select2">
+            <select asp-for="AdminRoleId" class="form-control select2" asp-items="@ViewBag.AdminRoleList">
                 <option selected disabled>-- Choose Role --</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
             </select>
             <span asp-validation-for="AdminRoleId" class="text-danger"></span>
         </div>

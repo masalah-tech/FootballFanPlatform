@@ -2,6 +2,7 @@
 using FFP.Models;
 using FFP.WebApp.Data.Crud;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
 using Saned.Data.Dapper;
@@ -36,13 +37,22 @@ namespace FFP.Areas.ControlPanel.Controllers
 
         public async Task<IActionResult> Upsert(int id)
         {
+            ViewBag.AdminRoleList = (await crud.GetAdminRolesAsync())
+                .Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Id.ToString()
+            });
+
             return PartialView(new Admin());
         }
 
         [HttpPost]
         public async Task<IActionResult> Upsert(Admin model, IFormFile adminPhoto)
         {
-            return PartialView(new Admin());
+            int res = await crud.AddAsync(model);
+
+            return Json(new { success = true, message = "Record added successfully" });
         }
     }
 }

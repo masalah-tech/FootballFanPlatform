@@ -159,6 +159,32 @@
             }
 
             $(`#addAdminModal .modal-body`).html(`<div class="loader"><div class="dots"></div></div>`);
+
+            const formData = new FormData(senderForm);
+
+            console.log(formData);
+
+            $.ajax({
+                method: "post",
+                url: "@Url.Action("Upsert")",
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+
+                    if (data.success) 
+                    {
+                        console.log(data.message);
+                    }
+
+                    $(`#addAdminModal`).modal(`hide`);
+                },
+                error: function (error) {
+                    console.log(error);
+                    console.log(`Something went wrong while trying to send the request`);
+                    $(`#addAdminModal`).modal(`hide`);
+                }
+            });
         }
 
     </script>

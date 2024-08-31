@@ -328,6 +328,20 @@ namespace Saned.Data.Dapper
                 return await myconnection.QueryFirstAsync<string>(sql, model);
             }
         }
+
+        public async Task<int> ExecuteIdentityIntAsync(string sql, T model)
+        {
+            if (db != null)
+            {
+                if (db.State == ConnectionState.Closed) db.Open();
+                return await db.QueryFirstAsync<int>(sql, model);
+            }
+            using (IDbConnection myconnection = new SqlConnection(DbHelper.GetConnectionString()))
+            {
+                if (myconnection.State == ConnectionState.Closed) myconnection.Open();
+                return await myconnection.QueryFirstAsync<int>(sql, model);
+            }
+        }
     }// end
 
 
