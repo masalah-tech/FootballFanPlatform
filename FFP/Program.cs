@@ -1,10 +1,13 @@
 using FFP.Data;
+using FFP.WebApp.Services;
+using FFP.WebApp.Services.IService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IFileUploader, FileUploader>();
 
 var app = builder.Build();
 

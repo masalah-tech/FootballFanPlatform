@@ -1,6 +1,8 @@
 ﻿using FFP.Data;
 using FFP.Models;
 using FFP.WebApp.Data.Crud;
+using FFP.WebApp.SD;
+using FFP.WebApp.Services.IService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +15,12 @@ namespace FFP.Areas.ControlPanel.Controllers
     public class AdminController : Controller
     {
         private readonly AdminCrud crud;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IFileUploader _fileUploader;
 
-        public AdminController(IWebHostEnvironment webHostEnvironment)
+        public AdminController(IFileUploader fileUploader)
         {
             crud = new AdminCrud();
-            _webHostEnvironment = webHostEnvironment;
+            _fileUploader = fileUploader;
         }
         public async Task<IActionResult> Index()
         {
@@ -54,21 +56,8 @@ namespace FFP.Areas.ControlPanel.Controllers
         {
             if (adminPhoto != null)
             {
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(adminPhoto.FileName);
-                string profilePhotosPath = @"uploads/profile-photos";
-                string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, profilePhotosPath);
-
-                if (!Directory.Exists(finalPath))
-                {
-                    Directory.CreateDirectory(finalPath);
-                }
-
-                using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
-                {
-                    adminPhoto.CopyTo(fileStream);
-                }
-
-                model.PersonalPhotoPath = "/" + profilePhotosPath + "/" + fileName;
+                model.PersonalPhotoPath = 
+                    await _fileUploader.Upload(adminPhoto, SdRelativePath.ProfilePhoto);
             }
 
             int res = await crud.AddAsync(model);
