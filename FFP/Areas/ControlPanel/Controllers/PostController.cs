@@ -7,32 +7,17 @@ namespace FFP.Areas.ControlPanel.Controllers
     [Area("ControlPanel")]
     public class PostController : Controller
     {
-        private readonly AppDbContext _context;
-
-        public PostController(AppDbContext context)
+        public PostController()
         {
-            _context = context;
         }
         public IActionResult Index()
         {
-            
-            var posts =
-                _context.Posts
-                .Include(p => p.User)
-                .ToList();
-
-            return View(posts);
+            return View();
         }
 
         public IActionResult Details(int id)
         {
-            var post =
-                _context.Posts
-                .Where(p => p.Id == id)
-                .Include(p => p.User)
-                .FirstOrDefault();
-
-            return View(post);
+            return View();
         }
     }
 }

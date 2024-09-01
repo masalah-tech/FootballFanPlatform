@@ -7,39 +7,22 @@ namespace FFP.Areas.ControlPanel.Controllers
     [Area("ControlPanel")]
     public class UserController : Controller
     {
-        private readonly AppDbContext _context;
-
-        public UserController(AppDbContext context)
+        public UserController()
         {
-            _context = context;
         }
         public IActionResult Index()
         {
-            var Users =
-                _context.Users
-                .ToList();
-
-            return View(Users);
+            return View();
         }
 
         public IActionResult Details(int id)
         {
-            var user =
-                _context.Users
-                .Where(u => u.Id == id)
-                .FirstOrDefault();
-
-            return View(user);
+            return View();
         }
 
         public IActionResult Edit(int id)
         {
-            var user =
-                _context.Users
-                .Where(u => u.Id == id)
-                .FirstOrDefault();
-
-            return View(user);
+            return View();
         }
 
 

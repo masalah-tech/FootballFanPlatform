@@ -1,10 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace Saned.Data.Dapper
 {
@@ -14,19 +10,6 @@ namespace Saned.Data.Dapper
         public Repository(IDbConnection _db = null)
         {
             db = _db;
-
-            //if (_db == null)
-            //{
-            //    using (IDbConnection myconnection = new SqlConnection(DbHelper.GetConnectionString()))
-            //    {
-            //        db = myconnection;
-            //    }
-            //}
-            //else
-            //{
-            //    db = _db;
-            //}
-
         }
 
         public int Execute(string sql, T model)
@@ -201,10 +184,6 @@ namespace Saned.Data.Dapper
             }
         }
 
-
-
-
-
         public List<string> GetList(string sql, object obj = null)
         {
             if (db != null)
@@ -260,6 +239,7 @@ namespace Saned.Data.Dapper
                 return await myconnection.ExecuteAsync(sql, id);
             }
         }
+
         public async Task<int> updateisread(string sql, object id)
         {
             if (db != null)
@@ -287,7 +267,7 @@ namespace Saned.Data.Dapper
                 return myconnection.QueryFirstOrDefault<int>(sql, obj);
             }
         }
-
+        
         public async Task<int> ExecuteIdentityAsync(string sql, T model)
         {
             if (db != null)
@@ -301,6 +281,7 @@ namespace Saned.Data.Dapper
                 return await myconnection.QueryFirstAsync<int>(sql, model);
             }
         }
+
         public async Task<long> ExecuteIdentityLongAsync(string sql, T model)
         {
             if (db != null)
@@ -342,9 +323,5 @@ namespace Saned.Data.Dapper
                 return await myconnection.QueryFirstAsync<int>(sql, model);
             }
         }
-    }// end
-
-
-
-
-}// NS
+    }
+}

@@ -12,32 +12,13 @@ namespace Saned.Data.Dapper
             return configuartion.GetConnectionString("DefaultConnection");
         }
 
-        public static string GetMobileConnectionString()
-        {
-            var configuartion = GetConfiguration();
-            return configuartion.GetConnectionString("MobileConnection");
-        }
-
         private static IConfigurationRoot GetConfiguration()
         {
-            try
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-                return builder.Build();
-            }
-            catch (Exception ex)
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
-
-                return builder.Build();
-            }
+            return builder.Build();
         }
-
-    }// end
-    
-}// NS
+    }
+}

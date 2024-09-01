@@ -7,23 +7,13 @@ namespace FFP.Areas.ControlPanel.Controllers
     [Area("ControlPanel")]
     public class MatchController : Controller
     {
-        private readonly AppDbContext _context;
-
-        public MatchController(AppDbContext context)
+        public MatchController()
         {
-            _context = context;
         }
 
         public IActionResult Index()
         {
-            var matches =
-                _context.Matches
-                .Include(m => m.Club1)
-                .Include(m => m.Club2)
-                .Include(m => m.League)
-                .ToList();
-
-            return View(matches);
+            return View();
         }
     }
 }
