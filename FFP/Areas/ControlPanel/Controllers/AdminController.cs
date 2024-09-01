@@ -13,10 +13,12 @@ namespace FFP.Areas.ControlPanel.Controllers
     public class AdminController : Controller
     {
         private readonly AdminCrud crud;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AdminController()
+        public AdminController(IWebHostEnvironment webHostEnvironment)
         {
             crud = new AdminCrud();
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> Index()
         {
@@ -50,6 +52,25 @@ namespace FFP.Areas.ControlPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Upsert(Admin model, IFormFile adminPhoto)
         {
+            if (adminPhoto != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(adminPhoto.FileName);
+                string profilePhotosPath = @"uploads/profile-photos";
+                string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, profilePhotosPath);
+
+                if (!Directory.Exists(finalPath))
+                {
+                    Directory.CreateDirectory(finalPath);
+                }
+
+                using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+                {
+                    adminPhoto.CopyTo(fileStream);
+                }
+
+                model.PersonalPhotoPath = "/" + profilePhotosPath + "/" + fileName;
+            }
+
             int res = await crud.AddAsync(model);
 
             return Json(new { success = true, message = "Record added successfully" });

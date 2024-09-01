@@ -36,7 +36,7 @@ namespace FFP.Models
         [DisplayName("Birth Date")]
         public DateTime BirthDate { get; set; } = new DateTime(2000, 1, 1);
         [Required]
-        public string PersonalPhotoPath { get; set; }
+        public string PersonalPhotoPath { get; set; } = "/img/user.png";
         [Required]
         public string Email { get; set; }
         [Required]
