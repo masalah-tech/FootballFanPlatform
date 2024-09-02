@@ -681,6 +681,15 @@ td .dropdown > a {
   background-color: #417ace !important;
 }
 
+.select2-container--bootstrap-5 .select2-dropdown {
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  margin-top: 0 !important;
+  position: relative !important;
+}
+
 .c-select-box {
   position: relative;
 }
@@ -1059,7 +1068,7 @@ td .dropdown > a {
   border-radius: 50%;
 }
 .profile-photo-wrapper input[type=file] {
-  display: none;
+  opacity: 0;
 }
 
 .profile-photo-wrapper:hover .overlay {

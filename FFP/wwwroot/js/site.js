@@ -20,11 +20,10 @@ async function intialize() {
     let counter = 0;
 
     $('#addAdminModal').on('shown.bs.modal', function () {
-        main()
+        main();
         $('.select2').select2({
             theme: "bootstrap-5",
             placeholder: 'Select an option',
-            dropdownParent: $(this)
         });
     });
 
