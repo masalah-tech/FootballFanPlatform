@@ -143,7 +143,6 @@
         });
 
         function showUpsertModal(id = 0) {
-            $.fn.modal.Constructor.prototype.enforceFocus = function () { };
             $(`#addAdminModal`).modal(`show`);
             $(`#addAdminModal .modal-title`).html("Add New Admin");
 
