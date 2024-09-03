@@ -1049,6 +1049,9 @@ td .dropdown > a {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .profile-photo-wrapper .overlay {
   background-color: rgba(0, 0, 0, 0.3);
