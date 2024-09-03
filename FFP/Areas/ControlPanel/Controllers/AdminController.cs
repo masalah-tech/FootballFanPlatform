@@ -24,9 +24,15 @@ namespace FFP.Areas.ControlPanel.Controllers
         }
         public async Task<IActionResult> Index()
         {
+
+            return View();
+        }
+
+        public async Task<IActionResult> Table()
+        {
             IEnumerable<Admin> list = await crud.GetListAsync();
 
-            return View(list);
+            return PartialView(list);
         }
 
         public IActionResult Details(int id)

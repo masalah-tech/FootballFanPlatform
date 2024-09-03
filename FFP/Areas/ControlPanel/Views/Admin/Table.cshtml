@@ -1,0 +1,76 @@
+﻿@using FFP.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@model List<Admin>
+
+<div class="c-datatable-wrapper">
+    <table id="dtlist" class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Profile Photo</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var admin in Model)
+            {
+                <tr>
+                    <td>@admin.Id</td>
+                    <td>
+                        <img src="@admin.PersonalPhotoPath" alt="@admin.FirstName" class="circular-user-photo" />
+                    </td>
+                    <td class="text-nowrap">@string.Format("{0} {1} {2} {3}", admin.FirstName, admin.SecondName, admin.ThirdName, admin.LastName)</td>
+                    <td class="text-nowrap">@admin.AdminRole.Title</td>
+                    <td class="text-nowrap">@admin.Username</td>
+                    <td class="text-nowrap">@admin.EncPassword</td>
+                    <td>
+                        @{
+                            if (admin.Status == true)
+                            {
+                                <span class="text-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Inactive</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="fs-5 link-dark d-block w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Admin" asp-action="Details" asp-route-id="@admin.Id">Show details</a></li>
+                                <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Admin" asp-action="Edit" asp-route-id="@admin.Id">Edit details</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        @{
+                                            if (admin.Status == true)
+                                            {
+                                                <span>Deactivate the admin</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Activate the admin</span>
+                                            }
+                                        }
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item link-danger" href="#">Delete the admin</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

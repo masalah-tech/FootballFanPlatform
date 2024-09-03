@@ -1,12 +1,8 @@
-﻿@using FFP.Models
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{
+﻿@{
     Layout = "~/Areas/ControlPanel/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Admins";
     ViewData["Page"] = "Admins";
 }
-
-@model List<Admin>
 
 <div id="addAdminModal" class="modal fade modal-lg" data-bs-backdrop="static">
     <div class="modal-dialog">
@@ -36,75 +32,8 @@
         <div class="p-3">
             <a href="javascript:void(0)" class="btn-label-primary" onclick="showUpsertModal()">Add new admin</a>
         </div>
-        <div class="c-datatable-wrapper">
-            <table id="adminsTable" class="table " style="width:100%">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Profile Photo</th>
-                        <th>Name</th>
-                        <th>Role</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Status</th>
-                        <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var admin in Model)
-                    {
-                        <tr>
-                            <td>@admin.Id</td>
-                            <td>
-                                <img src="@admin.PersonalPhotoPath" alt="@admin.FirstName" class="circular-user-photo" />
-                            </td>
-                            <td class="text-nowrap">@string.Format("{0} {1} {2} {3}", admin.FirstName, admin.SecondName, admin.ThirdName, admin.LastName)</td>
-                            <td class="text-nowrap">@admin.AdminRole.Title</td>
-                            <td class="text-nowrap">@admin.Username</td>
-                            <td class="text-nowrap">@admin.EncPassword</td>
-                            <td>
-                                @{
-                                    if (admin.Status == true)
-                                    {
-                                            <span class="text-success">Active</span>
-                                    }
-                                    else
-                                    {
-                                            <span class="text-danger">Inactive</span>
-                                    }
-                                }
-                            </td>
-                            <td>
-                                <div class="dropdown">
-                                    <a class="fs-5 link-dark d-block w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Admin" asp-action="Details" asp-route-id="@admin.Id">Show details</a></li>
-                                        <li><a class="dropdown-item" asp-area="ControlPanel" asp-controller="Admin" asp-action="Edit" asp-route-id="@admin.Id">Edit details</a></li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                @{
-                                                    if (admin.Status == true)
-                                                    {
-                                                            <span>Deactivate the admin</span>
-                                                    }
-                                                    else
-                                                    {
-                                                            <span>Activate the admin</span>
-                                                    }
-                                                }
-                                            </a>
-                                        </li>
-                                        <li><a class="dropdown-item link-danger" href="#">Delete the admin</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div id="table-container">
+            
         </div>
     </div>
 </div>
@@ -119,21 +48,35 @@
             placeholder: 'Select an option'
         });
 
-        $('#adminsTable').DataTable({
-            "columnDefs": [
-                {
-                    "targets": [1, 3, 4, 5, 6, 7],
-                    "orderable": false
-                },
-            ],
-            "initComplete": function (settings, json) {
-                const tableWrapper =
-                    document.querySelector("div:has(> #adminsTable)");
+        loadTable();
 
-                tableWrapper.classList.add("mzn-scroll");
-                tableWrapper.classList.add("mzn-x-scroll");
-            },
-        });
+        function loadTable() {
+            $(`#table-container`).html(`<div class="loader"><div class="dots"></div></div>`);
+            $(`#table-container`).load("@Url.Action("Table")",
+                function (responseText, textStatus, XMLHttpRequest) {
+                    if (textStatus == "success") {
+                        $('#dtlist').DataTable({
+                            "columnDefs": [
+                                {
+                                    "targets": [1, 3, 4, 5, 6, 7],
+                                    "orderable": false
+                                },
+                            ],
+                            "order": [[0, "desc"]],
+                            "initComplete": function (settings, json) {
+                                const tableWrapper =
+                                    document.querySelector("div:has(> #adminsTable)");
+
+                                tableWrapper.classList.add("mzn-scroll");
+                                tableWrapper.classList.add("mzn-x-scroll");
+                            },
+                        });
+                    }
+                    else {
+                        console.log(`Something went wrong while fetching data`);
+                    }
+                });
+        }
 
         function showUpsertModal(id = 0) {
             $(`#addAdminModal`).modal(`show`);
@@ -179,11 +122,13 @@
                     }
 
                     $(`#addAdminModal`).modal(`hide`);
+                    loadTable();
                 },
                 error: function (error) {
                     console.log(error);
                     console.log(`Something went wrong while trying to send the request`);
                     $(`#addAdminModal`).modal(`hide`);
+                    loadTable();
                 }
             });
         }
