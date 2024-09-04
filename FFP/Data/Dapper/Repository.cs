@@ -142,7 +142,7 @@ namespace Saned.Data.Dapper
             }
         }
 
-        public async Task<T> GetAsync(string sql, object id)
+        public async Task<T> GetAsync(string sql, object id = null)
         {
             if (db != null)
             {

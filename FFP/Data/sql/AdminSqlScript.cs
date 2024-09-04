@@ -7,6 +7,25 @@
             return "select * from Admins";
         }
 
+        public static string GetPagedListQuery(int start, int length, int sortColumnIndex, string sortDirection)
+        {
+            return string.Format(@"SELECT * FROM Admins
+                  WHERE (@SearchValue IS NULL OR FirstName LIKE @SearchValue)
+                  ORDER BY CASE WHEN {2} = 0 THEN FirstName END {3}
+                  OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", start, length, sortColumnIndex, sortDirection); 
+        }
+
+        public static string GetTotalCountQuery()
+        {
+            return "SELECT COUNT(*) FROM Admins";
+        }
+
+        public static string GetFilteredCountQuery()
+        {
+            return @"SELECT COUNT(*) FROM Admins
+                  WHERE (@SearchValue IS NULL OR FirstName LIKE @SearchValue)";
+        }
+
         public static string AddQuery() 
         {
             return @"begin try

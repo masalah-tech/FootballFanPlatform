@@ -56,6 +56,55 @@
                 function (responseText, textStatus, XMLHttpRequest) {
                     if (textStatus == "success") {
                         $('#dtlist').DataTable({
+                            "processing": true,
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "@Url.Action("TableData")",
+                                "type": "POST",
+                                "dataSrc": function (json) {
+                                    return json.data;
+                                }
+                            },
+                            "columns": [
+                                { "data": "id" },
+                                { 
+                                    "data": "personalPhotoPath",
+                                    render: function (data, type, row) {
+                                        return `<img src="${data}" alt="${row.firstName}" class="circular-user-photo" />`;
+                                    }
+                                },
+                                { "data": "firstName" },
+                                { "data": "adminRoleId" },
+                                { "data": "username" },
+                                { "data": "encPassword" },
+                                { 
+                                    "data": "status",
+                                    render: function (data) {
+                                        return data ? `<span class="text-success">Active</span>` : `<span class="text-danger">Inactive</span>`;
+                                    }
+                                },
+                                {
+                                    "data": "id",
+                                    render: function (data, type, row) {
+                                        return `<div class="dropdown">
+                                                    <a class="fs-5 link-dark d-block w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <li><a class="dropdown-item">Show details</a></li>
+                                                        <li><a class="dropdown-item">Edit details</a></li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="#">
+                                                                ${row.status ? "<span>Deactivate the admin</span>" : "<span>Activate the admin</span>"}
+                                                            </a>
+                                                        </li>
+                                                        <li><a class="dropdown-item link-danger" href="#">Delete the admin</a></li>
+                                                    </ul>
+                                                </div>`;
+                                    }
+                                },
+                            ],
                             "columnDefs": [
                                 {
                                     "targets": [1, 3, 4, 5, 6, 7],
@@ -64,11 +113,11 @@
                             ],
                             "order": [[0, "desc"]],
                             "initComplete": function (settings, json) {
-                                const tableWrapper =
-                                    document.querySelector("div:has(> #adminsTable)");
+                                // const tableWrapper =
+                                //     document.querySelector("div:has(> #adminsTable)");
 
-                                tableWrapper.classList.add("mzn-scroll");
-                                tableWrapper.classList.add("mzn-x-scroll");
+                                // tableWrapper.classList.add("mzn-scroll");
+                                // tableWrapper.classList.add("mzn-x-scroll");
                             },
                         });
                     }

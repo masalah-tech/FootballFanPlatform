@@ -22,6 +22,55 @@ namespace FFP.WebApp.Data.Crud
             }
         }
 
+        public async Task<IEnumerable<Admin>> GetPagedListAsync(int start, int length, int sortColumnIndex, string sortDirection, string searchValue)
+        {
+            string query = GetPagedListQuery(start, length, sortColumnIndex, sortDirection);
+            Repository<Admin> crud = new Repository<Admin>();
+
+            try
+            {
+                return await crud.GetListAsync(query, new
+                {
+                    SearchValue = $"%{searchValue}%"
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<int> GetTotalCountAsync()
+        {
+            string query = GetTotalCountQuery();
+            Repository<string> crud = new Repository<string>();
+
+            try
+            {
+                return Convert.ToInt32(await crud.GetAsync(query));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<int> GetFilteredCountAsync(string searchValue)
+        {
+            string query = GetFilteredCountQuery();
+            Repository<string> crud = new Repository<string>();
+
+            try
+            {
+                return Convert.ToInt32(await crud.GetAsync(query, new { SearchValue = $"%{searchValue}%" }));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         public async Task<int> AddAsync(Admin model)
         {
             string query = AddQuery();

@@ -30,9 +30,34 @@ namespace FFP.Areas.ControlPanel.Controllers
 
         public async Task<IActionResult> Table()
         {
-            IEnumerable<Admin> list = await crud.GetListAsync();
+            return PartialView();
+        }
 
-            return PartialView(list);
+        public async Task<IActionResult> TableData(int draw, int start, int length)
+        {
+            // Search parameter
+            var searchValue = Request.Query["search[value]"].FirstOrDefault();
+
+            // Sort Column Name and Direction
+            var sortColumnIndex = Convert.ToInt32(Request.Query["order[0][column]"]);
+            var sortDirection = Request.Query["order[0][dir]"];
+
+            // Fetch the data from the database
+            IEnumerable<Admin> list = await crud.GetPagedListAsync(start, length, sortColumnIndex, sortDirection, searchValue);
+
+            // Total number of records
+            int recordsTotal = await crud.GetTotalCountAsync();
+
+            // Filtered records count
+            int recordsFiltered = await crud.GetFilteredCountAsync(searchValue);
+
+            return Json(new
+            {
+                draw = draw,
+                recordsTotal = recordsTotal,
+                recordsFiltered = recordsFiltered,
+                data = list
+            });
         }
 
         public IActionResult Details(int id)
