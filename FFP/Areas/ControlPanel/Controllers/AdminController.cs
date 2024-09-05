@@ -39,8 +39,8 @@ namespace FFP.Areas.ControlPanel.Controllers
             var searchValue = Request.Query["search[value]"].FirstOrDefault();
 
             // Sort Column Name and Direction
-            var sortColumnIndex = Convert.ToInt32(Request.Query["order[0][column]"]);
-            var sortDirection = Request.Query["order[0][dir]"];
+            var sortColumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
+            var sortDirection = Request.Form["order[0][dir]"];
 
             // Fetch the data from the database
             IEnumerable<Admin> list = await crud.GetPagedListAsync(start, length, sortColumnIndex, sortDirection, searchValue);

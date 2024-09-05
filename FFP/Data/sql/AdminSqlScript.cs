@@ -11,7 +11,16 @@
         {
             return string.Format(@"SELECT * FROM Admins
                   WHERE (@SearchValue IS NULL OR FirstName LIKE @SearchValue)
-                  ORDER BY CASE WHEN {2} = 0 THEN FirstName END {3}
+                  ORDER BY 
+                    CASE 
+                        WHEN {2} = 0 THEN cast(Id as nvarchar(max))  
+                        WHEN {2} = 2 THEN FirstName 
+                        WHEN {2} = 3 THEN cast(AdminRoleId as nvarchar(max))  
+                        WHEN {2} = 4 THEN Username 
+                        WHEN {2} = 5 THEN EncPassword 
+                        WHEN {2} = 6 THEN cast(Status as nvarchar(max))  
+                        else cast(0 as nvarchar(max)) 
+                    END {3}
                   OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", start, length, sortColumnIndex, sortDirection); 
         }
 

@@ -87,7 +87,7 @@
                                     "data": "id",
                                     render: function (data, type, row) {
                                         return `<div class="dropdown">
-                                                    <a class="fs-5 link-dark d-block w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <a class="fs-5 link-dark d-flex justify-content-center p-0 w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                                     </a>
 
@@ -113,11 +113,11 @@
                             ],
                             "order": [[0, "desc"]],
                             "initComplete": function (settings, json) {
-                                // const tableWrapper =
-                                //     document.querySelector("div:has(> #adminsTable)");
+                                const tableWrapper =
+                                    document.querySelector("div:has(> #dtlist)");
 
-                                // tableWrapper.classList.add("mzn-scroll");
-                                // tableWrapper.classList.add("mzn-x-scroll");
+                                tableWrapper.classList.add("c-scroll");
+                                tableWrapper.classList.add("c-x-scroll");
                             },
                         });
                     }
