@@ -67,16 +67,16 @@
                             },
                             "columns": [
                                 { "data": "id" },
-                                { 
-                                    "data": "personalPhotoPath",
+                                {
+                                    "data": "profilePhotoPath",
                                     render: function (data, type, row) {
                                         return `<img src="${data}" alt="${row.firstName}" class="circular-user-photo" />`;
                                     }
                                 },
-                                { "data": "firstName" },
-                                { "data": "adminRoleId" },
+                                { "data": "name" },
+                                { "data": "role" },
                                 { "data": "username" },
-                                { "data": "encPassword" },
+                                { "data": "password" },
                                 { 
                                     "data": "status",
                                     render: function (data) {

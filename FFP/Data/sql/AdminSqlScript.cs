@@ -9,16 +9,25 @@
 
         public static string GetPagedListQuery(int start, int length, int sortColumnIndex, string sortDirection)
         {
-            return string.Format(@"SELECT * FROM Admins
-                  WHERE (@SearchValue IS NULL OR FirstName LIKE @SearchValue)
+            return string.Format(
+                @"with data as ( SELECT admn.Id, admn.PersonalPhotoPath ProfilePhotoPath, 
+	                    admn.FirstName + ' ' + admn.LastName Name, rol.Title Role, admn.Username,
+	                    admn.EncPassword Password, case when admn.Status = 0 then 'Inactive' else 'Active' end as Status
+                    FROM Admins admn inner join AdminRoles rol on admn.AdminRoleId = rol.Id)
+                    select * from data
+                  WHERE (
+                        @SearchValue IS NULL 
+                        OR Id LIKE @SearchValue
+                        OR Name LIKE @SearchValue
+                        OR Role LIKE @SearchValue
+                        OR Username LIKE @SearchValue
+                        OR Password LIKE @SearchValue
+                        OR Status LIKE @SearchValue
+                    )
                   ORDER BY 
                     CASE 
-                        WHEN {2} = 0 THEN cast(Id as nvarchar(max))  
-                        WHEN {2} = 2 THEN FirstName 
-                        WHEN {2} = 3 THEN cast(AdminRoleId as nvarchar(max))  
-                        WHEN {2} = 4 THEN Username 
-                        WHEN {2} = 5 THEN EncPassword 
-                        WHEN {2} = 6 THEN cast(Status as nvarchar(max))  
+                        WHEN {2} = 0 THEN cast(data.Id as nvarchar(max))  
+                        WHEN {2} = 2 THEN data.Name 
                         else cast(0 as nvarchar(max)) 
                     END {3}
                   OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", start, length, sortColumnIndex, sortDirection); 

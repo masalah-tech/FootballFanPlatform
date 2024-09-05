@@ -1,5 +1,6 @@
 ﻿using FFP.Models;
 using FFP.WebApp.Data.sql;
+using FFP.WebApp.Data.ViewModels;
 using NuGet.Protocol.Core.Types;
 using Saned.Data.Dapper;
 
@@ -22,10 +23,10 @@ namespace FFP.WebApp.Data.Crud
             }
         }
 
-        public async Task<IEnumerable<Admin>> GetPagedListAsync(int start, int length, int sortColumnIndex, string sortDirection, string searchValue)
+        public async Task<IEnumerable<AdminVM>> GetPagedListAsync(int start, int length, int sortColumnIndex, string sortDirection, string searchValue)
         {
             string query = GetPagedListQuery(start, length, sortColumnIndex, sortDirection);
-            Repository<Admin> crud = new Repository<Admin>();
+            Repository<AdminVM> crud = new Repository<AdminVM>();
 
             try
             {

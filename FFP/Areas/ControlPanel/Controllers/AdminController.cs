@@ -1,6 +1,7 @@
 ﻿using FFP.Data;
 using FFP.Models;
 using FFP.WebApp.Data.Crud;
+using FFP.WebApp.Data.ViewModels;
 using FFP.WebApp.SD;
 using FFP.WebApp.Services.IService;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace FFP.Areas.ControlPanel.Controllers
             var sortDirection = Request.Form["order[0][dir]"];
 
             // Fetch the data from the database
-            IEnumerable<Admin> list = await crud.GetPagedListAsync(start, length, sortColumnIndex, sortDirection, searchValue);
+            IEnumerable<AdminVM> list = await crud.GetPagedListAsync(start, length, sortColumnIndex, sortDirection, searchValue);
 
             // Total number of records
             int recordsTotal = await crud.GetTotalCountAsync();
