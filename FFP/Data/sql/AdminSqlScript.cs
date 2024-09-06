@@ -28,6 +28,10 @@
                     CASE 
                         WHEN {2} = 0 THEN cast(data.Id as nvarchar(max))  
                         WHEN {2} = 2 THEN data.Name 
+                        WHEN {2} = 3 THEN data.Role 
+                        WHEN {2} = 4 THEN data.Username 
+                        WHEN {2} = 5 THEN data.Password 
+                        WHEN {2} = 6 THEN data.Status 
                         else cast(0 as nvarchar(max)) 
                     END {3}
                   OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", start, length, sortColumnIndex, sortDirection); 

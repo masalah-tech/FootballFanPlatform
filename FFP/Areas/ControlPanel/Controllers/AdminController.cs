@@ -29,27 +29,17 @@ namespace FFP.Areas.ControlPanel.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Table()
+        [HttpPost]
+        public async Task<IActionResult> GetTableData(int draw, int start, int length)
         {
-            return PartialView();
-        }
-
-        public async Task<IActionResult> TableData(int draw, int start, int length)
-        {
-            // Search parameter
-            var searchValue = Request.Query["search[value]"].FirstOrDefault();
-
-            // Sort Column Name and Direction
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
             var sortColumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
             var sortDirection = Request.Form["order[0][dir]"];
 
-            // Fetch the data from the database
             IEnumerable<AdminVM> list = await crud.GetPagedListAsync(start, length, sortColumnIndex, sortDirection, searchValue);
 
-            // Total number of records
             int recordsTotal = await crud.GetTotalCountAsync();
 
-            // Filtered records count
             int recordsFiltered = await crud.GetFilteredCountAsync(searchValue);
 
             return Json(new
