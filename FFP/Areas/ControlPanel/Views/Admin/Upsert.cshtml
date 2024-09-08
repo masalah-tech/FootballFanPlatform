@@ -111,10 +111,10 @@
                 <label asp-for="EncPassword" class="form-label"></label>
                 <div class="c-eye-pass-box">
                     <input asp-for="EncPassword" type="password" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
-                    <div class="c-pass-icon-wrapper">
-                        <i class="fa-solid fa-eye c-icon active show-pass-btn"></i>
-                        <i class="fa-solid fa-eye-slash c-icon hide-pass-btn"></i>
-                    </div>
+                    <button type="button" onclick="togglePassword(this, event)" class="c-pass-icon-wrapper">
+                        <i class="fa-solid fa-eye c-icon active"></i>
+                        <i class="fa-solid fa-eye-slash c-icon"></i>
+                    </button>
                 </div>
                 <span asp-validation-for="EncPassword" class="text-danger"></span>
             </div>

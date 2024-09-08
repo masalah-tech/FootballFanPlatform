@@ -3,16 +3,17 @@
 
     (function(){
     var oldSelect2 = jQuery.fn.select2;
-    jQuery.fn.select2 = function() {
-        if (arguments.length === 1 && typeof arguments[0] === 'object' && typeof arguments[0].dropdownParent !== 'defined') {
-            const modalParent = jQuery(this).parents('div.modal').first();
-            if (modalParent.length > 0) {
-                arguments[0].dropdownParent = modalParent;
+        jQuery.fn.select2 = function() {
+            if (arguments.length === 1 && typeof arguments[0] === 'object' && typeof arguments[0].dropdownParent !== 'defined') {
+                const modalParent = jQuery(this).parents('div.modal').first();
+                if (modalParent.length > 0) {
+                    arguments[0].dropdownParent = modalParent;
+                }
             }
-        }
-        return oldSelect2.apply(this,arguments);
-    };
-})();
+            return oldSelect2.apply(this,arguments);
+        };
+    })();
+
 });
 
 // Entry Point

@@ -792,11 +792,14 @@ td .dropdown > a {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
 }
 .c-eye-pass-box .c-pass-icon-wrapper .c-icon {
   display: none;
   cursor: pointer;
   color: rgb(100, 100, 100);
+  font-size: 0.9rem;
 }
 .c-eye-pass-box .c-pass-icon-wrapper .c-icon.active {
   display: block;

@@ -6,11 +6,14 @@
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
 
     .c-icon {
       display: none;
       cursor: pointer;
       color: rgb(100 100 100);
+      font-size: 0.9rem;
     }
 
     .c-icon.active {
