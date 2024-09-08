@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="Nationality" class="form-label"></label>
-                <select asp-for="Nationality" class="form-control select2 countries-dropdown">
+                <select asp-for="Nationality" class="form-control select2 countries-dropdown" asp-items="ViewBag.CountryList">
                     <option selected disabled>-- Choose Nationality --</option>
                 </select>
                 <span asp-validation-for="Nationality" class="text-danger"></span>
@@ -74,7 +74,7 @@
             <legend class="w-auto px-2">Address Details</legend>
             <div class="col-md-6 mb-3">
                 <label asp-for="Address.Country" class="form-label"></label>
-                <select asp-for="Address.Country" class="form-control select2">
+                <select asp-for="Address.Country" class="form-control select2" asp-items="ViewBag.CountryList">
                     <option selected disabled>-- Choose Country --</option>
                 </select>
                 <span asp-validation-for="Address.Country" class="text-danger"></span>

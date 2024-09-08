@@ -65,10 +65,17 @@ namespace FFP.Areas.ControlPanel.Controllers
         {
             ViewBag.AdminRoleList = (await crud.GetAdminRolesAsync())
                 .Select(x => new SelectListItem
-            {
-                Text = x.Title,
-                Value = x.Id.ToString()
-            });
+                {
+                    Text = x.Title,
+                    Value = x.Id.ToString()
+                });
+
+            ViewBag.CountryList = (await new CountryLookupCrud().GetListAsync())
+                .Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Name
+                });
 
             return PartialView(new Admin());
         }
