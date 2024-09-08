@@ -3,122 +3,127 @@
 @model Admin
 
 <form method="post" onsubmit="handleUpsertSubmit(this, event)">
-    <fieldset class="form-group border mt-2 mb-4 mx-1 px-2 pb-2 pt-4 row">
-        <legend class="w-auto px-2">Primary Information</legend>
-        <div class="mb-3">
-            <div class="profile-photo-wrapper">
-                <img src="~/img/user.png" />
-                <label for="admin-profile-photo" class="overlay edit-btn">
-                    <i class='bx bxs-edit'></i>
-                </label>
-                <input class="editable-profile-photo" id="admin-profile-photo" type="file" accept="image/*" name="adminPhoto" />
-            </div>
-        </div>
-        <hr />
-        <div class="col-md-6 mb-3">
-            <label asp-for="AdminRoleId" class="form-label"></label>
-            <select asp-for="AdminRoleId" class="form-control select2" asp-items="@ViewBag.AdminRoleList">
-                <option selected disabled>-- Choose Role --</option>
-            </select>
-            <span asp-validation-for="AdminRoleId" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="FirstName" class="form-label"></label>
-            <input asp-for="FirstName" class="form-control">
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="SecondName" class="form-label"></label>
-            <input asp-for="SecondName" class="form-control">
-            <span asp-validation-for="SecondName" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="ThirdName" class="form-label"></label>
-            <input asp-for="ThirdName" class="form-control">
-            <span asp-validation-for="ThirdName" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="LastName" class="form-label"></label>
-            <input asp-for="LastName" class="form-control">
-            <span asp-validation-for="LastName" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Nationality" class="form-label"></label>
-            <select asp-for="Nationality" class="form-control select2 countries-dropdown">
-                <option selected disabled>-- Choose Nationality --</option>
-            </select>
-            <span asp-validation-for="Nationality" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="BirthDate" class="form-label"></label>
-            <input asp-for="BirthDate" type="date" class="form-control">
-            <span asp-validation-for="BirthDate" class="text-danger"></span>
-        </div>
-    </fieldset>
-    <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
-        <legend class="w-auto px-2">Contact Details</legend>
-        <div class="col-md-6 mb-3">
-            <label asp-for="PhoneNumber" class="form-label"></label>
-            <input asp-for="PhoneNumber" class="form-control">
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Email" class="form-label"></label>
-            <input asp-for="Email" class="form-control" id="newAdminEmail">
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-    </fieldset>
-    <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
-        <legend class="w-auto px-2">Address Details</legend>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Address.Country" class="form-label"></label>
-            <select asp-for="Address.Country" class="form-control select2 countries-dropdown">
-                <option selected disabled>-- Choose Country --</option>
-            </select>
-            <span asp-validation-for="Address.Country" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Address.City" class="form-label"></label>
-            <input asp-for="Address.City" class="form-control">
-            <span asp-validation-for="Address.City" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Address.Street" class="form-label"></label>
-            <input asp-for="Address.Street" class="form-control">
-            <span asp-validation-for="Address.Street" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Address.AppartmentNo" class="form-label"></label>
-            <input asp-for="Address.AppartmentNo" class="form-control">
-            <span asp-validation-for="Address.AppartmentNo" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Address.ZipCode" class="form-label"></label>
-            <input asp-for="Address.ZipCode" class="form-control">
-            <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
-        </div>
-    </fieldset>
-    <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
-        <legend class="w-auto px-2">Credentials</legend>
-        <div class="col-md-6 mb-3">
-            <label asp-for="Username" class="form-label"></label>
-            <input asp-for="Username" class="form-control">
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label asp-for="EncPassword" class="form-label"></label>
-            <div class="c-eye-pass-box">
-                <input asp-for="EncPassword" type="password" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
-                <div class="c-pass-icon-wrapper">
-                    <i class="fa-solid fa-eye c-icon active show-pass-btn"></i>
-                    <i class="fa-solid fa-eye-slash c-icon hide-pass-btn"></i>
+    <div class="body-content c-scroll">
+        <fieldset class="form-group border mt-2 mb-4 mx-1 px-2 pb-2 pt-4 row">
+            <legend class="w-auto px-2">Primary Information</legend>
+            <div class="mb-3">
+                <div id="admin-profile-photo" class="profile-photo-wrapper">
+                    <img src="~/img/user.png" />
+                    <label for="admin-profile-photo" class="overlay edit-btn">
+                        <i class='bx bxs-edit'></i>
+                    </label>
+                    <input class="editable-profile-photo" id="admin-profile-photo" type="file" 
+                        accept="image/*" name="adminPhoto" onchange="updateProfileImage(this, '#admin-profile-photo')" />
                 </div>
             </div>
-            <span asp-validation-for="EncPassword" class="text-danger"></span>
-        </div>
-    </fieldset>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Submit</button>
+            <hr />
+            <div class="col-md-6 mb-3">
+                <label asp-for="AdminRoleId" class="form-label"></label>
+                <select asp-for="AdminRoleId" class="form-control select2" asp-items="@ViewBag.AdminRoleList" >
+                    <option selected disabled>-- Choose Role --</option>
+                </select>
+                <span asp-validation-for="AdminRoleId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="FirstName" class="form-label"></label>
+                <input asp-for="FirstName" class="form-control">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="SecondName" class="form-label"></label>
+                <input asp-for="SecondName" class="form-control">
+                <span asp-validation-for="SecondName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="ThirdName" class="form-label"></label>
+                <input asp-for="ThirdName" class="form-control">
+                <span asp-validation-for="ThirdName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="LastName" class="form-label"></label>
+                <input asp-for="LastName" class="form-control">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Nationality" class="form-label"></label>
+                <select asp-for="Nationality" class="form-control select2 countries-dropdown">
+                    <option selected disabled>-- Choose Nationality --</option>
+                </select>
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="BirthDate" class="form-label"></label>
+                <input asp-for="BirthDate" type="date" class="form-control">
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
+            <legend class="w-auto px-2">Contact Details</legend>
+            <div class="col-md-6 mb-3">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" id="newAdminEmail">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
+            <legend class="w-auto px-2">Address Details</legend>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Address.Country" class="form-label"></label>
+                <select asp-for="Address.Country" class="form-control select2">
+                    <option selected disabled>-- Choose Country --</option>
+                </select>
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Address.City" class="form-label"></label>
+                <input asp-for="Address.City" class="form-control">
+                <span asp-validation-for="Address.City" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Address.Street" class="form-label"></label>
+                <input asp-for="Address.Street" class="form-control">
+                <span asp-validation-for="Address.Street" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Address.AppartmentNo" class="form-label"></label>
+                <input asp-for="Address.AppartmentNo" class="form-control">
+                <span asp-validation-for="Address.AppartmentNo" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Address.ZipCode" class="form-label"></label>
+                <input asp-for="Address.ZipCode" class="form-control">
+                <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <fieldset class="form-group border mb-4 mx-1 px-2 pb-2 pt-4 row">
+            <legend class="w-auto px-2">Credentials</legend>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Username" class="form-control">
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="EncPassword" class="form-label"></label>
+                <div class="c-eye-pass-box">
+                    <input asp-for="EncPassword" type="password" class="form-control" aria-describedby="newAdminPasswordHelpBlock">
+                    <div class="c-pass-icon-wrapper">
+                        <i class="fa-solid fa-eye c-icon active show-pass-btn"></i>
+                        <i class="fa-solid fa-eye-slash c-icon hide-pass-btn"></i>
+                    </div>
+                </div>
+                <span asp-validation-for="EncPassword" class="text-danger"></span>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
 <partial name="_ValidationScriptsPartial" />

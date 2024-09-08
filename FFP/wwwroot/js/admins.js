@@ -4,8 +4,6 @@ updateTable();
 
 function updateTable() {
 
-    console.log(`aaaaaaaaaaa`);
-
     $('#dtlist').DataTable({
         "processing": true,
         "serverSide": true,
@@ -74,6 +72,7 @@ function updateTable() {
 }
 
 function showUpsertModal(id = 0) {
+
     $(`#addAdminModal`).modal(`show`);
     $(`#addAdminModal .modal-title`).html("Add New Admin");
 

@@ -603,6 +603,14 @@ td .dropdown > a {
   color: rgb(255, 255, 255);
 }
 
+.modal {
+  overflow: hidden;
+}
+.modal .body-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
 #traffic-bar-chart .apexcharts-legend {
   top: 30px !important;
   right: auto !important;
@@ -681,13 +689,8 @@ td .dropdown > a {
   background-color: #417ace !important;
 }
 
-.select2-container--bootstrap-5 .select2-dropdown {
-  top: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  right: auto !important;
-  margin-top: 0 !important;
-  position: relative !important;
+.select2-dropdown {
+  position: absolute !important;
 }
 
 .c-select-box {

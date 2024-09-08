@@ -152,3 +152,11 @@ td .dropdown > a {
   background-color: rgb(236 78 79);
   color: rgb(255 255 255);
 }
+
+.modal {
+  overflow: hidden;
+  .body-content {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
